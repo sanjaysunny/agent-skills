@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Japan — Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .cherry-petal {
+      position: fixed; pointer-events: none; z-index: 0;
+      font-size: 1.2rem; opacity: 0;
+      animation: petalFall linear infinite;
+    }
+    @keyframes petalFall {
+      0% { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    .section-label { color: var(--japan-blush); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+  </style>
+</head>
+<body class="theme-japan">
+  <div id="petals"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="destinations.html">← All Destinations</a></li>
+      <li><a href="italy-europe.html">Italy / Europe</a></li>
+      <li><a href="uruguay.html">Uruguay</a></li>
+      <li><a href="choose.html">Choose</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="dest-hero japan">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 30% 60%,rgba(26,31,78,0.8) 0%,transparent 70%);pointer-events:none;"></div>
+    <div class="dest-hero-content container">
+      <div class="section-label animate-in" style="margin-bottom:12px;">The Wonder Escape</div>
+      <h1 class="dest-hero-title animate-in delay-1" style="color:var(--japan-blush); font-size:clamp(3rem,8vw,6rem); margin-bottom:16px;">Japan</h1>
+      <p class="subtitle animate-in delay-2" style="color:rgba(255,255,255,0.75); max-width:480px;">
+        For temples, city lights, gardens, sushi, and magic.
+      </p>
+      <div class="gold-line animate-in delay-3" style="margin:24px 0; background:var(--japan-blush);"></div>
+      <a href="choose.html?choice=japan" class="btn animate-in delay-4" style="background:var(--japan-blush);color:var(--japan-dark);">
+        Choose Japan →
+      </a>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section>
+    <div class="container-narrow">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,2.5vw,1.4rem); line-height:1.9; text-align:center; font-style:italic; color:rgba(255,255,255,0.85);">
+        "This escape is for the part of you that wants to see something completely different. Japan would be our trip of wonder: peaceful gardens, beautiful streets, amazing food, quiet little moments, and memories that feel like a movie."
+      </p>
+    </div>
+  </section>
+
+  <!-- Dream Itinerary -->
+  <section style="padding-top:0;">
+    <div class="container-narrow">
+      <div class="section-label" style="text-align:center;">Dream Itinerary</div>
+      <h2 style="text-align:center; margin-bottom:8px; color:var(--japan-blush);">How the days could look</h2>
+      <div class="gold-line wide" style="background:var(--japan-blush);"></div>
+
+      <ul class="itinerary-list" style="margin-top:40px;">
+        <li>Tokyo city lights — neon, wonder, and the most beautiful chaos</li>
+        <li>Kyoto temples and gardens — the quietest, most beautiful places on earth</li>
+        <li>A proper sushi night — the kind you talk about for years</li>
+        <li>A slow walk under lanterns — hand in hand, no plans</li>
+        <li>One beautiful hotel stay — the kind that makes you feel special</li>
+        <li>A family photo we will keep forever</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Why you'd love it -->
+  <section style="background:rgba(26,31,78,0.4); padding:80px 0;">
+    <div class="container-narrow">
+      <div class="section-label" style="text-align:center;">Why I think you'd love it</div>
+      <h2 style="text-align:center; margin-bottom:32px;">Made for you</h2>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;" class="kabir-section">
+        <div class="kabir-box">
+          <h4>🌸 Beauty everywhere</h4>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan is one of the most visually stunning places on earth. Every street, garden, and temple is a photograph waiting to happen.</p>
+        </div>
+        <div class="kabir-box">
+          <h4>🍣 Food like nowhere else</h4>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">From tiny ramen spots to high-end sushi, Japan's food culture is extraordinary. You would be in heaven.</p>
+        </div>
+        <div class="kabir-box">
+          <h4>🏮 Calm & wonder together</h4>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan balances magic and peace like nowhere else. Buzzing cities and serene gardens, all within minutes of each other.</p>
+        </div>
+        <div class="kabir-box">
+          <h4>🎵 A new kind of music</h4>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Jazz bars, karaoke, live music in unexpected places — Japan has a music scene you've never experienced before.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- With Kabir -->
+  <section>
+    <div class="container-narrow">
+      <div class="section-label" style="text-align:center;">With Kabir or just us</div>
+      <h2 style="text-align:center; margin-bottom:32px;">Both are beautiful</h2>
+      <div class="kabir-section">
+        <div class="kabir-box">
+          <h4>With Kabir 👦</h4>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan is incredibly family-friendly. Watching Kabir's eyes light up at Kyoto's temples, the deer in Nara, and the food — it would be the kind of trip he'd remember forever.</p>
+        </div>
+        <div class="kabir-box">
+          <h4>Just us 💫</h4>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">A romantic, intimate trip where we slow down completely. Quiet mornings in beautiful hotels, late nights in jazz bars, and the kind of peace that comes with being somewhere completely new.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Love note -->
+  <section style="padding:60px 0;">
+    <div class="container-narrow">
+      <div class="love-note" style="background:rgba(26,31,78,0.5); border-color:rgba(232,160,176,0.3);">
+        <p style="color:var(--japan-blush);">
+          "I want to see your face when you experience something completely new. I want to watch you be amazed, curious, and happy."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="text-align:center; padding:60px 0 100px;">
+    <div class="container-narrow">
+      <h2 style="margin-bottom:16px;">Ready to choose Japan?</h2>
+      <p class="subtitle" style="margin-bottom:40px;">No pressure. You can still explore the others.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="choose.html?choice=japan" class="btn" style="background:var(--japan-blush);color:var(--japan-dark);">Choose Japan →</a>
+        <a href="destinations.html" class="btn btn-outline">Explore the other dreams</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 48px 24px; text-align: center; border-top: 1px solid rgba(232,160,176,0.1);">
+    <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Made with love, for you. Happy 38th. ✦</p>
+  </footer>
+
+  <script>
+    const petalsContainer = document.getElementById('petals');
+    const petals = ['🌸', '🌺', '✿', '꩜'];
+    for (let i = 0; i < 15; i++) {
+      const p = document.createElement('div');
+      p.className = 'cherry-petal';
+      p.textContent = petals[Math.floor(Math.random() * petals.length)];
+      p.style.cssText = `left:${Math.random()*100}%;animation-delay:${Math.random()*12}s;animation-duration:${8+Math.random()*8}s;font-size:${0.8+Math.random()*0.8}rem;`;
+      petalsContainer.appendChild(p);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,744 @@
+/* ============================================
+   Choose Our Next Adventure — Shared Styles
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim: rgba(201, 168, 76, 0.15);
+  --navy: #0b0f1a;
+  --navy-mid: #141929;
+  --navy-light: #1e2540;
+  --text: #f0ece4;
+  --text-muted: rgba(240, 236, 228, 0.6);
+  --radius: 16px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Japan palette */
+  --japan-indigo: #1a1f4e;
+  --japan-blush: #e8a0b0;
+  --japan-cream: #fef6f0;
+  --japan-dark: #0e1230;
+
+  /* Italy palette */
+  --italy-cream: #fef5e4;
+  --italy-terra: #c0632a;
+  --italy-olive: #5a6b35;
+  --italy-wine: #8b1a2e;
+  --italy-dark: #2a1a0e;
+
+  /* Uruguay palette */
+  --uruguay-ocean: #0a2e4a;
+  --uruguay-sand: #d4a96a;
+  --uruguay-gold: #e8a820;
+  --uruguay-wine: #7a1a2e;
+  --uruguay-dark: #061a28;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.4rem, 3vw, 2rem); }
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Layout ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container-narrow { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+section { padding: 80px 0; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(11, 15, 26, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow { margin-bottom: 20px; }
+.hero-title { margin-bottom: 24px; }
+.hero-subtitle { margin-bottom: 48px; max-width: 560px; }
+
+/* ── Gold divider ── */
+.gold-line {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 32px auto;
+  opacity: 0.6;
+}
+.gold-line.wide { width: 120px; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.5);
+}
+.btn-outline:hover {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 10px 20px;
+}
+.btn-ghost:hover { color: var(--text); }
+
+/* ── Cards ── */
+.card {
+  background: var(--navy-light);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius);
+  padding: 40px;
+  transition: all var(--transition);
+}
+.card:hover {
+  border-color: rgba(201,168,76,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* ── Destination Cards ── */
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.dest-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.15);
+  transition: all var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+}
+.dest-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+.dest-card-header {
+  padding: 48px 36px 36px;
+  text-align: center;
+  position: relative;
+}
+.dest-card-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.dest-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.dest-card-subtitle {
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+}
+.dest-card-body {
+  padding: 24px 36px 36px;
+  background: rgba(0,0,0,0.2);
+}
+.dest-card-copy {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+/* Japan card */
+.dest-card.japan { background: linear-gradient(160deg, var(--japan-dark) 0%, var(--japan-indigo) 100%); color: #fff; }
+.dest-card.japan .dest-card-subtitle { color: var(--japan-blush); }
+.dest-card.japan .btn { background: var(--japan-blush); color: var(--japan-dark); }
+
+/* Italy card */
+.dest-card.italy { background: linear-gradient(160deg, var(--italy-dark) 0%, #3a2010 100%); color: #fff; }
+.dest-card.italy .dest-card-subtitle { color: #e8c49a; }
+.dest-card.italy .btn { background: var(--italy-terra); color: #fff; }
+
+/* Uruguay card */
+.dest-card.uruguay { background: linear-gradient(160deg, var(--uruguay-dark) 0%, var(--uruguay-ocean) 100%); color: #fff; }
+.dest-card.uruguay .dest-card-subtitle { color: var(--uruguay-sand); }
+.dest-card.uruguay .btn { background: var(--uruguay-sand); color: var(--uruguay-dark); }
+
+/* ── Destination page header ── */
+.dest-hero {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 140px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.dest-hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+/* ── Japan hero ── */
+.dest-hero.japan { background: linear-gradient(160deg, var(--japan-dark) 0%, var(--japan-indigo) 60%, #2a1540 100%); }
+.dest-hero.japan .dest-hero-title { color: var(--japan-blush); }
+
+/* ── Italy hero ── */
+.dest-hero.italy { background: linear-gradient(160deg, var(--italy-dark) 0%, #2a1a0e 50%, #1a0e08 100%); }
+.dest-hero.italy .dest-hero-title { color: #e8c49a; }
+
+/* ── Uruguay hero ── */
+.dest-hero.uruguay { background: linear-gradient(160deg, var(--uruguay-dark) 0%, var(--uruguay-ocean) 60%, #041420 100%); }
+.dest-hero.uruguay .dest-hero-title { color: var(--uruguay-sand); }
+
+/* ── Sections on destination pages ── */
+.itinerary-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.itinerary-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(201,168,76,0.05);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+.itinerary-list li::before {
+  content: '✦';
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  margin-top: 4px;
+}
+
+.love-note {
+  background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: var(--radius);
+  padding: 48px;
+  text-align: center;
+}
+.love-note p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--gold-light);
+}
+
+.kabir-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.kabir-box {
+  background: var(--navy-light);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.kabir-box h4 { color: var(--gold); margin-bottom: 16px; font-size: 1.1rem; }
+
+/* ── Quiz game styles ── */
+.game-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 120px 24px 80px;
+}
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  height: 3px;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.5s ease;
+  border-radius: 4px;
+}
+.question-block { display: none; }
+.question-block.active { display: block; animation: fadeUp 0.5s ease; }
+
+.question-num { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.2em; margin-bottom: 12px; }
+.question-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 40px;
+  line-height: 1.3;
+}
+
+.options-list { display: flex; flex-direction: column; gap: 16px; }
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 28px;
+  background: var(--navy-light);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: left;
+  width: 100%;
+  line-height: 1.5;
+}
+.option-btn:hover {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  transform: translateX(4px);
+}
+.option-btn.selected {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  color: var(--gold-light);
+}
+.option-letter {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  color: var(--gold);
+}
+
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* ── Result screen ── */
+.result-screen { display: none; text-align: center; padding: 60px 0; animation: fadeUp 0.6s ease; }
+.result-screen.visible { display: block; }
+.result-badge {
+  display: inline-block;
+  padding: 8px 24px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.result-badge.japan { background: var(--japan-blush); color: var(--japan-dark); }
+.result-badge.italy { background: #e8c49a; color: var(--italy-dark); }
+.result-badge.uruguay { background: var(--uruguay-sand); color: var(--uruguay-dark); }
+
+.result-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin-bottom: 16px;
+}
+.result-explain {
+  max-width: 500px;
+  margin: 0 auto 48px;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+.result-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ── Final choice page ── */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 48px 0;
+}
+.choice-card {
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition);
+}
+.choice-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.choice-card.japan { background: linear-gradient(160deg, var(--japan-dark), var(--japan-indigo)); border-color: rgba(232,160,176,0.3); }
+.choice-card.italy { background: linear-gradient(160deg, var(--italy-dark), #3a2010); border-color: rgba(192,99,42,0.3); }
+.choice-card.uruguay { background: linear-gradient(160deg, var(--uruguay-dark), var(--uruguay-ocean)); border-color: rgba(212,169,106,0.3); }
+.choice-card:hover.japan { border-color: var(--japan-blush); }
+.choice-card:hover.italy { border-color: var(--italy-terra); }
+.choice-card:hover.uruguay { border-color: var(--uruguay-sand); }
+.choice-card-icon { font-size: 3.5rem; margin-bottom: 20px; }
+.choice-card-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 8px; }
+.choice-card-tagline { font-style: italic; color: rgba(255,255,255,0.65); font-size: 0.9rem; }
+
+/* ── Celebration ── */
+.celebration-screen { display: none; text-align: center; padding: 80px 24px; animation: fadeUp 0.7s ease; }
+.celebration-screen.visible { display: block; }
+.celebration-dest {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+.celebration-copy {
+  max-width: 520px;
+  margin: 0 auto 48px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+.promise-box {
+  background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: var(--radius);
+  padding: 48px;
+  max-width: 600px;
+  margin: 48px auto;
+  text-align: left;
+}
+.promise-box h3 {
+  color: var(--gold);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.promise-box p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  font-style: italic;
+  color: var(--text);
+}
+.hidden-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold);
+  margin-top: 32px;
+  opacity: 0.7;
+}
+
+/* ── Print cards ── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+  .nav { display: none; }
+}
+.print-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 384px);
+  gap: 32px;
+  justify-content: center;
+}
+.print-card {
+  width: 384px;
+  min-height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  page-break-inside: avoid;
+}
+.print-card-front, .print-card-back {
+  padding: 32px;
+}
+.print-card-front {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.print-card-back {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.qr-placeholder {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-game { background: linear-gradient(135deg, #1a1535, #2d2460); }
+.card-japan { background: linear-gradient(135deg, var(--japan-dark), var(--japan-indigo)); }
+.card-italy { background: linear-gradient(135deg, var(--italy-dark), #3a2010); }
+.card-uruguay { background: linear-gradient(135deg, var(--uruguay-dark), var(--uruguay-ocean)); }
+.card-choice { background: linear-gradient(135deg, #0f1520, #1a2535); }
+
+/* ── Video page ── */
+.video-sequence {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 80px 0;
+}
+.video-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  text-align: center;
+  padding: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: revealLine 0.8s ease forwards;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
+.video-line.gold { color: var(--gold); }
+.video-line.small { font-size: clamp(1rem, 2.5vw, 1.5rem); color: var(--text-muted); }
+.video-line.large { font-size: clamp(2.5rem, 7vw, 5rem); }
+
+/* ── Box instructions ── */
+.box-section { margin-bottom: 48px; }
+.envelope-list { list-style: none; display: flex; flex-direction: column; gap: 16px; counter-reset: env; }
+.envelope-list li {
+  counter-increment: env;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 28px;
+  background: var(--navy-light);
+  border-radius: 12px;
+  border: 1px solid rgba(201,168,76,0.1);
+}
+.envelope-list li::before {
+  content: counter(env);
+  width: 36px;
+  height: 36px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.letter-box {
+  background: var(--navy-light);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius);
+  padding: 48px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 2;
+  font-style: italic;
+}
+.letter-box p { margin-bottom: 20px; }
+.letter-box .signature { font-style: normal; color: var(--gold); font-size: 1.3rem; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes revealLine {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-in { animation: fadeUp 0.8s ease both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.25s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.6s; }
+
+/* ── Star / petal decorations ── */
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(201,168,76,0.4);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+  .kabir-section { grid-template-columns: 1fr; }
+  .dest-grid { grid-template-columns: 1fr; }
+  .choice-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .print-cards-grid { grid-template-columns: 1fr; }
+  .print-card { width: 100%; max-width: 384px; }
+  .quiz-nav { flex-direction: column; gap: 16px; }
+}
+
+/* ── Japan page theme overrides ── */
+body.theme-japan { background: linear-gradient(180deg, var(--japan-dark) 0%, #0e1230 40%, #0a0d20 100%); }
+body.theme-japan .eyebrow { color: var(--japan-blush); }
+body.theme-japan .gold-line { background: var(--japan-blush); }
+body.theme-japan .love-note p { color: var(--japan-blush); }
+body.theme-japan .itinerary-list li { border-left-color: var(--japan-blush); }
+body.theme-japan .itinerary-list li::before { color: var(--japan-blush); }
+
+/* ── Italy page theme overrides ── */
+body.theme-italy { background: linear-gradient(180deg, var(--italy-dark) 0%, #1a0e08 40%, #0f0805 100%); }
+body.theme-italy .eyebrow { color: #e8c49a; }
+body.theme-italy .gold-line { background: var(--italy-terra); }
+body.theme-italy .love-note p { color: #e8c49a; }
+body.theme-italy .itinerary-list li { border-left-color: var(--italy-terra); }
+body.theme-italy .itinerary-list li::before { color: var(--italy-terra); }
+
+/* ── Uruguay page theme overrides ── */
+body.theme-uruguay { background: linear-gradient(180deg, var(--uruguay-dark) 0%, #041420 40%, #020d18 100%); }
+body.theme-uruguay .eyebrow { color: var(--uruguay-sand); }
+body.theme-uruguay .gold-line { background: var(--uruguay-sand); }
+body.theme-uruguay .love-note p { color: var(--uruguay-sand); }
+body.theme-uruguay .itinerary-list li { border-left-color: var(--uruguay-sand); }
+body.theme-uruguay .itinerary-list li::before { color: var(--uruguay-sand); }

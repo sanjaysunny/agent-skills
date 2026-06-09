@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Print Cards — Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    body { background: #1a1a2e; }
+
+    .print-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+    }
+
+    .cards-intro { text-align: center; margin-bottom: 64px; }
+
+    .print-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .print-card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .print-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease;
+    }
+    .print-card:hover { transform: scale(1.02); }
+
+    .pc-front {
+      padding: 40px 32px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    .pc-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .pc-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; margin-bottom: 6px; }
+    .pc-subtitle { font-size: 0.85rem; font-style: italic; opacity: 0.75; }
+
+    .pc-back {
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-height: 120px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .pc-back-text { flex: 1; font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.8); font-style: italic; }
+    .pc-qr-wrap {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 8px;
+      padding: 6px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pc-qr-wrap canvas { display: block; }
+
+    /* Card themes */
+    .card-game { background: linear-gradient(160deg, #12103a, #1e1a5c); color: #fff; }
+    .card-game .pc-back { background: rgba(0,0,0,0.25); }
+    .card-japan { background: linear-gradient(160deg, var(--japan-dark), #1a1f4e); color: #fff; }
+    .card-japan .pc-back { background: rgba(0,0,0,0.25); }
+    .card-italy { background: linear-gradient(160deg, #2a1a0e, #3d2212); color: #fff; }
+    .card-italy .pc-back { background: rgba(0,0,0,0.25); }
+    .card-uruguay { background: linear-gradient(160deg, var(--uruguay-dark), #0e3352); color: #fff; }
+    .card-uruguay .pc-back { background: rgba(0,0,0,0.25); }
+    .card-choice { background: linear-gradient(160deg, #0a0e1a, #131e30); color: #fff; border: 1px solid rgba(201,168,76,0.3); }
+    .card-choice .pc-back { background: rgba(0,0,0,0.3); }
+
+    .card-label {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .print-actions { text-align: center; margin-top: 64px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    @media print {
+      .print-actions, .nav, .cards-intro, .no-print { display: none !important; }
+      body { background: white; }
+      .print-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 0; }
+      .print-page { padding: 20px; }
+      .print-card { box-shadow: none; border: 1px solid #eee; page-break-inside: avoid; }
+      .pc-title, .pc-subtitle { color: black !important; }
+      .pc-back-text { color: #333 !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav no-print">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="choose.html">Choose</a></li>
+    </ul>
+  </nav>
+
+  <div class="print-page">
+    <div class="cards-intro animate-in no-print">
+      <div class="eyebrow" style="margin-bottom:16px;">The gift box</div>
+      <h1 style="font-size:clamp(2rem,5vw,3.2rem);">Print the Cards</h1>
+      <p class="subtitle" style="margin-top:12px;">Five cards. Five dreams. One gift box.<br>Print them, fold them, place them inside.</p>
+      <div class="gold-line wide"></div>
+    </div>
+
+    <div class="print-cards-grid">
+
+      <!-- Card 1: Start the Game -->
+      <div class="print-card-wrap">
+        <div class="print-card card-game">
+          <div class="pc-front">
+            <div class="card-label" style="background:rgba(201,168,76,0.2); color:var(--gold); border:1px solid rgba(201,168,76,0.4);">Open First</div>
+            <div class="pc-icon">✨</div>
+            <div class="pc-title" style="background:linear-gradient(135deg,#c9a84c,#e8c97a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Start the Game</div>
+            <div class="pc-subtitle">Choose our next adventure</div>
+          </div>
+          <div class="pc-back">
+            <div class="pc-back-text">"Scan this first. Explore the dreams. Play the game. Then choose where our next chapter begins."</div>
+            <div class="pc-qr-wrap" id="qr-game"></div>
+          </div>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted);">Card 1 · Label: <em>Start Here</em></p>
+      </div>
+
+      <!-- Card 2: Japan -->
+      <div class="print-card-wrap">
+        <div class="print-card card-japan">
+          <div class="pc-front">
+            <div class="card-label" style="background:rgba(232,160,176,0.2); color:#e8a0b0; border:1px solid rgba(232,160,176,0.4);">Destination</div>
+            <div class="pc-icon">🌸</div>
+            <div class="pc-title" style="color:#e8a0b0;">Japan</div>
+            <div class="pc-subtitle">Wonder, beauty, and a little magic</div>
+          </div>
+          <div class="pc-back">
+            <div class="pc-back-text">"Temples, gardens, sushi, city lights, and the feeling of discovering something completely new together."</div>
+            <div class="pc-qr-wrap" id="qr-japan"></div>
+          </div>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted);">Card 2 · Label: <em>Japan</em></p>
+      </div>
+
+      <!-- Card 3: Italy / Europe -->
+      <div class="print-card-wrap">
+        <div class="print-card card-italy">
+          <div class="pc-front">
+            <div class="card-label" style="background:rgba(192,99,42,0.25); color:#e8c49a; border:1px solid rgba(192,99,42,0.4);">Destination</div>
+            <div class="pc-icon">🍷</div>
+            <div class="pc-title" style="color:#e8c49a;">Italy / Europe</div>
+            <div class="pc-subtitle">Romance, food, and slow beautiful days</div>
+          </div>
+          <div class="pc-back">
+            <div class="pc-back-text">"Coffee, pasta, wine, old streets, beautiful hotels, long walks, and the kind of romance that makes time slow down."</div>
+            <div class="pc-qr-wrap" id="qr-italy"></div>
+          </div>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted);">Card 3 · Label: <em>Italy / Europe</em></p>
+      </div>
+
+      <!-- Card 4: Uruguay -->
+      <div class="print-card-wrap">
+        <div class="print-card card-uruguay">
+          <div class="pc-front">
+            <div class="card-label" style="background:rgba(212,169,106,0.2); color:var(--uruguay-sand); border:1px solid rgba(212,169,106,0.4);">Destination</div>
+            <div class="pc-icon">🎶</div>
+            <div class="pc-title" style="color:var(--uruguay-sand);">Uruguay</div>
+            <div class="pc-subtitle">Music, wine, beaches, and the unexpected</div>
+          </div>
+          <div class="pc-back">
+            <div class="pc-back-text">"Montevideo, Colonia, Punta del Este, music, warm nights, good food, and a destination that already has a place in your heart."</div>
+            <div class="pc-qr-wrap" id="qr-uruguay"></div>
+          </div>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted);">Card 4 · Label: <em>Uruguay</em></p>
+      </div>
+
+      <!-- Card 5: Final Choice -->
+      <div class="print-card-wrap">
+        <div class="print-card card-choice">
+          <div class="pc-front">
+            <div class="card-label" style="background:rgba(201,168,76,0.15); color:var(--gold); border:1px solid rgba(201,168,76,0.3);">Open Last</div>
+            <div class="pc-icon">🌍</div>
+            <div class="pc-title" style="color:var(--gold);">Final Choice</div>
+            <div class="pc-subtitle">Where should we go next?</div>
+          </div>
+          <div class="pc-back">
+            <div class="pc-back-text">"No pressure. No wrong answer. Pick the place your heart wants most. I will handle the planning."</div>
+            <div class="pc-qr-wrap" id="qr-choose"></div>
+          </div>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted);">Card 5 · Label: <em>Final Choice</em></p>
+      </div>
+
+    </div><!-- /grid -->
+
+    <div class="print-actions no-print">
+      <button class="btn btn-gold" onclick="window.print()">🖨️ Print All Cards</button>
+      <a href="box-instructions.html" class="btn btn-outline">Box Instructions →</a>
+      <a href="index.html" class="btn btn-ghost">← Back Home</a>
+    </div>
+  </div>
+
+  <script>
+    // Generate QR codes pointing to the correct pages
+    // In production these would point to your deployed URL
+    const BASE = window.location.origin + window.location.pathname.replace('print-cards.html', '');
+
+    const qrTargets = {
+      'qr-game':   BASE + 'game.html',
+      'qr-japan':  BASE + 'japan.html',
+      'qr-italy':  BASE + 'italy-europe.html',
+      'qr-uruguay':BASE + 'uruguay.html',
+      'qr-choose': BASE + 'choose.html',
+    };
+
+    Object.entries(qrTargets).forEach(([id, url]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      QRCode.toCanvas(document.createElement('canvas'), url, {
+        width: 68, margin: 0, color: { dark: '#000000', light: '#ffffff' }
+      }, (err, canvas) => {
+        if (!err) { el.innerHTML = ''; el.appendChild(canvas); }
+      });
+    });
+  </script>
+</body>
+</html>

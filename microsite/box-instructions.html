@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Box Instructions — Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .gift-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .gift-item:last-child { border-bottom: none; }
+    .gift-item-icon { font-size: 1.5rem; flex-shrink: 0; width: 36px; text-align: center; }
+    .gift-item-text h4 { color: var(--gold-light); font-size: 1rem; margin-bottom: 4px; font-family: 'Lato', sans-serif; font-weight: 700; }
+    .gift-item-text p { color: var(--text-muted); font-size: 0.9rem; }
+    .optional-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="print-cards.html">Print Cards</a></li>
+      <li><a href="index.html">← Home</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding-top:140px; padding-bottom:60px; text-align:center;" class="container-narrow">
+    <div class="eyebrow animate-in" style="margin-bottom:16px;">The gift</div>
+    <h1 class="animate-in delay-1">The Box</h1>
+    <p class="subtitle animate-in delay-2" style="margin-top:16px;">Everything you need to put together the perfect gift.</p>
+    <div class="gold-line wide animate-in delay-3"></div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="container-narrow">
+
+      <!-- What goes inside -->
+      <div class="box-section">
+        <div class="eyebrow" style="margin-bottom:12px;">What goes inside the box</div>
+        <h2 style="margin-bottom:24px;">Contents</h2>
+
+        <div style="background:var(--navy-light); border:1px solid rgba(201,168,76,0.12); border-radius:var(--radius); padding:32px 40px;">
+          <div class="gift-item">
+            <div class="gift-item-icon">🃏</div>
+            <div class="gift-item-text">
+              <h4>5 printed destination cards</h4>
+              <p>Start the Game, Japan, Italy / Europe, Uruguay, Final Choice. Print from the <a href="print-cards.html" style="color:var(--gold);">Print Cards page</a>.</p>
+            </div>
+          </div>
+          <div class="gift-item">
+            <div class="gift-item-icon">✉️</div>
+            <div class="gift-item-text">
+              <h4>5 envelopes</h4>
+              <p>One per card. Label each envelope clearly so she knows the order to open them.</p>
+            </div>
+          </div>
+          <div class="gift-item">
+            <div class="gift-item-icon">📝</div>
+            <div class="gift-item-text">
+              <h4>A handwritten letter</h4>
+              <p>The letter template is below. Write it by hand — it matters more than anything else in the box.</p>
+            </div>
+          </div>
+          <div class="gift-item">
+            <div class="gift-item-icon">🎁</div>
+            <div class="gift-item-text">
+              <h4>A small travel gift</h4>
+              <p>Something that feels like travel: a beautiful passport holder, a luggage tag, or a mini globe.</p>
+            </div>
+          </div>
+          <div class="gift-item">
+            <div class="gift-item-icon">🎤</div>
+            <div class="gift-item-text">
+              <h4>Wireless karaoke microphone <span class="optional-tag">Optional</span></h4>
+              <p>She loves singing. This is the kind of gift she would actually use and smile every time she does.</p>
+            </div>
+          </div>
+          <div class="gift-item">
+            <div class="gift-item-icon">🌍</div>
+            <div class="gift-item-text">
+              <h4>Mini globe or passport holder <span class="optional-tag">Optional</span></h4>
+              <p>A physical reminder that the adventure is real and coming. Passport holders are especially meaningful for a travel gift.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Envelope labels -->
+      <div class="box-section" style="margin-top:60px;">
+        <div class="eyebrow" style="margin-bottom:12px;">How to label the envelopes</div>
+        <h2 style="margin-bottom:24px;">Envelope Order</h2>
+
+        <ol class="envelope-list">
+          <li><span>Start Here — the game card. She opens this first and scans the QR code.</span></li>
+          <li><span>Japan — the Japan destination card.</span></li>
+          <li><span>Italy / Europe — the Italy/Europe card.</span></li>
+          <li><span>Uruguay — the Uruguay card.</span></li>
+          <li><span>Final Choice — open this when she's ready to decide.</span></li>
+        </ol>
+
+        <div style="margin-top:24px; padding:24px; background:var(--gold-dim); border-radius:12px; border:1px solid rgba(201,168,76,0.2);">
+          <p style="font-size:0.9rem; color:var(--text-muted); font-style:italic;">
+            Add a small note on top of the box or on the outside:
+          </p>
+          <p style="margin-top:12px; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:var(--text);">
+            "Open the Start the Game card first. Then explore each destination. When you are ready, choose where we go next."
+          </p>
+        </div>
+      </div>
+
+      <!-- Letter template -->
+      <div class="box-section" style="margin-top:60px;">
+        <div class="eyebrow" style="margin-bottom:12px;">The handwritten letter</div>
+        <h2 style="margin-bottom:24px;">Template</h2>
+
+        <div class="letter-box">
+          <p style="font-style:normal; font-weight:700; color:var(--gold-light); font-size:1.3rem; margin-bottom:24px;">
+            For your 38th: Choose Our Next Adventure
+          </p>
+
+          <p>Happy birthday, my love.</p>
+
+          <p>You love travelling. You love singing. And I love watching you come alive through both.</p>
+
+          <p>This year, I did not want to give you just another thing. I wanted to give you a choice, a little game, and the beginning of our next adventure.</p>
+
+          <p>There are three dreams waiting for you: Japan, Italy or Europe, and Uruguay. Each one feels different. Each one could be beautiful. But the best part is the same in every version: I get to go there with you.</p>
+
+          <p>You have become such a beautiful mother to Kabir, and I love watching that part of you. But I also want you to always remember that you are still you. The woman I fell in love with. The woman whose voice, laugh, and heart make life feel bigger. The woman I would travel anywhere with.</p>
+
+          <p>So play the game. Explore the cards. Choose the place your heart wants most.</p>
+
+          <p>I will plan it.</p>
+
+          <p class="signature">Happy 38th birthday. I love you.</p>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div style="margin-top:60px; text-align:center; padding:48px; background:var(--navy-light); border-radius:var(--radius); border:1px solid rgba(201,168,76,0.1);">
+        <h3 style="color:var(--gold); margin-bottom:16px;">One last thing</h3>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; line-height:1.8; color:var(--text-muted);">
+          The best part of this gift is not the box, the cards, or the trip.<br>
+          It's the moment she realises you planned all of this for her.<br>
+          <span style="color:var(--text);">That's the real gift.</span>
+        </p>
+      </div>
+
+      <div style="text-align:center; margin-top:48px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="print-cards.html" class="btn btn-gold">Print the Cards →</a>
+        <a href="index.html" class="btn btn-outline">← Back Home</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer style="padding: 48px 24px; text-align: center; border-top: 1px solid rgba(201,168,76,0.1); margin-top:60px;">
+    <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Made with love, for you. Happy 38th. ✦</p>
+  </footer>
+</body>
+</html>

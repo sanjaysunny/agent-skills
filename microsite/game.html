@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where Should We Go? — Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { background: var(--navy); }
+    .back-link {
+      position: fixed; top: 24px; left: 24px; z-index: 200;
+      color: var(--text-muted); text-decoration: none; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+      transition: color var(--transition);
+    }
+    .back-link:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Back</a>
+
+  <div class="game-container">
+    <!-- Quiz header -->
+    <div style="text-align:center; margin-bottom:48px;" class="animate-in">
+      <div class="eyebrow" style="margin-bottom:16px;">The game</div>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Where should we go next?</h1>
+      <p class="subtitle" style="margin-top:12px;">Five questions. No wrong answers. Just your heart.</p>
+      <div class="gold-line wide"></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-bar-wrap" id="progressWrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+    </div>
+
+    <!-- Questions -->
+    <div id="quizArea">
+
+      <!-- Q1 -->
+      <div class="question-block active" data-q="0">
+        <div class="question-num">Question 1 of 5</div>
+        <div class="question-text">What kind of escape is your heart craving?</div>
+        <div class="options-list">
+          <button class="option-btn" data-value="italy" onclick="selectOption(this, 0)">
+            <span class="option-letter">A</span>
+            <span>Beauty, food, and slow romantic streets</span>
+          </button>
+          <button class="option-btn" data-value="japan" onclick="selectOption(this, 0)">
+            <span class="option-letter">B</span>
+            <span>Something completely different and magical</span>
+          </button>
+          <button class="option-btn" data-value="uruguay" onclick="selectOption(this, 0)">
+            <span class="option-letter">C</span>
+            <span>Sun, music, wine, and a place that feels unexpected</span>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <div></div>
+          <button class="btn btn-gold" onclick="nextQuestion(0)" id="next0" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-block" data-q="1">
+        <div class="question-num">Question 2 of 5</div>
+        <div class="question-text">What do you want to feel on this trip?</div>
+        <div class="options-list">
+          <button class="option-btn" data-value="italy" onclick="selectOption(this, 1)">
+            <span class="option-letter">A</span>
+            <span>Spoiled, dressed up, and romantic</span>
+          </button>
+          <button class="option-btn" data-value="japan" onclick="selectOption(this, 1)">
+            <span class="option-letter">B</span>
+            <span>Curious, amazed, and inspired</span>
+          </button>
+          <button class="option-btn" data-value="uruguay" onclick="selectOption(this, 1)">
+            <span class="option-letter">C</span>
+            <span>Free, relaxed, and alive</span>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn btn-ghost" onclick="prevQuestion(1)">← Back</button>
+          <button class="btn btn-gold" onclick="nextQuestion(1)" id="next1" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-block" data-q="2">
+        <div class="question-num">Question 3 of 5</div>
+        <div class="question-text">What should our days look like?</div>
+        <div class="options-list">
+          <button class="option-btn" data-value="italy" onclick="selectOption(this, 2)">
+            <span class="option-letter">A</span>
+            <span>Coffee, walking, pasta, wine, and old streets</span>
+          </button>
+          <button class="option-btn" data-value="japan" onclick="selectOption(this, 2)">
+            <span class="option-letter">B</span>
+            <span>Temples, gardens, sushi, city lights, and quiet moments</span>
+          </button>
+          <button class="option-btn" data-value="uruguay" onclick="selectOption(this, 2)">
+            <span class="option-letter">C</span>
+            <span>Beaches, music, markets, steak, wine, and sunsets</span>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn btn-ghost" onclick="prevQuestion(2)">← Back</button>
+          <button class="btn btn-gold" onclick="nextQuestion(2)" id="next2" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question-block" data-q="3">
+        <div class="question-num">Question 4 of 5</div>
+        <div class="question-text">What kind of memory do you want Kabir to have if we take him?</div>
+        <div class="options-list">
+          <button class="option-btn" data-value="italy" onclick="selectOption(this, 3)">
+            <span class="option-letter">A</span>
+            <span>Family photos in beautiful European streets</span>
+          </button>
+          <button class="option-btn" data-value="japan" onclick="selectOption(this, 3)">
+            <span class="option-letter">B</span>
+            <span>Seeing something totally new and magical</span>
+          </button>
+          <button class="option-btn" data-value="uruguay" onclick="selectOption(this, 3)">
+            <span class="option-letter">C</span>
+            <span>Running near the beach while we slow down</span>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn btn-ghost" onclick="prevQuestion(3)">← Back</button>
+          <button class="btn btn-gold" onclick="nextQuestion(3)" id="next3" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question-block" data-q="4">
+        <div class="question-num">Question 5 of 5</div>
+        <div class="question-text">Pick the soundtrack of the trip.</div>
+        <div class="options-list">
+          <button class="option-btn" data-value="italy" onclick="selectOption(this, 4)">
+            <span class="option-letter">A</span>
+            <span>Romantic dinner music in a tiny restaurant</span>
+          </button>
+          <button class="option-btn" data-value="japan" onclick="selectOption(this, 4)">
+            <span class="option-letter">B</span>
+            <span>Soft city lights and beautiful peaceful walks</span>
+          </button>
+          <button class="option-btn" data-value="uruguay" onclick="selectOption(this, 4)">
+            <span class="option-letter">C</span>
+            <span>Singing, dancing, and warm nights</span>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn btn-ghost" onclick="prevQuestion(4)">← Back</button>
+          <button class="btn btn-gold" onclick="showResult()" id="next4" disabled>See my result →</button>
+        </div>
+      </div>
+
+    </div><!-- /quizArea -->
+
+    <!-- Result screen -->
+    <div class="result-screen" id="resultScreen">
+      <div class="result-badge" id="resultBadge"></div>
+      <div class="result-title" id="resultTitle"></div>
+      <p class="subtitle" style="margin-bottom:16px; font-size:1rem;">Your heart is pointing here.</p>
+      <p class="result-explain" id="resultExplain"></p>
+      <div class="result-actions">
+        <a id="resultMainBtn" href="#" class="btn btn-gold"></a>
+        <a href="destinations.html" class="btn btn-outline">Explore the other dreams</a>
+      </div>
+      <div style="margin-top:40px; padding-top:32px; border-top:1px solid rgba(201,168,76,0.1);">
+        <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;">
+          Remember: the quiz is just a suggestion. You get to choose.
+        </p>
+        <button class="btn btn-ghost" onclick="restartQuiz()">Start over</button>
+      </div>
+    </div>
+
+  </div><!-- /game-container -->
+
+  <script>
+    const answers = Array(5).fill(null);
+    const TOTAL = 5;
+
+    const results = {
+      japan: {
+        label: 'Japan',
+        badge: 'japan',
+        title: 'Japan is calling you.',
+        explain: 'Your answers point to wonder, curiosity, and magic. Japan would be a trip unlike anything — temples, city lights, sushi, quiet gardens, and the feeling of discovering something completely new together.',
+        link: 'japan.html',
+        btnText: 'Open Japan →',
+      },
+      italy: {
+        label: 'Italy / Europe',
+        badge: 'italy',
+        title: 'Italy is your dream.',
+        explain: 'Your answers point to romance, beauty, and slow beautiful days. Italy would be the kind of trip where time slows down — coffee, pasta, wine, old streets, and the kind of romance that makes life feel magical.',
+        link: 'italy-europe.html',
+        btnText: 'Open Italy / Europe →',
+      },
+      uruguay: {
+        label: 'Uruguay',
+        badge: 'uruguay',
+        title: 'Uruguay is your adventure.',
+        explain: 'Your answers point to warmth, music, and the unexpected. Uruguay would be our most personal trip — beaches, wine, music, Montevideo streets, and a destination that already lives in your heart.',
+        link: 'uruguay.html',
+        btnText: 'Open Uruguay →',
+      },
+    };
+
+    function selectOption(btn, qIdx) {
+      const block = document.querySelector(`[data-q="${qIdx}"]`);
+      block.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers[qIdx] = btn.dataset.value;
+      const nextBtn = document.getElementById(`next${qIdx}`);
+      if (nextBtn) nextBtn.disabled = false;
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const filled = answers.filter(Boolean).length;
+      document.getElementById('progressBar').style.width = `${(filled / TOTAL) * 100}%`;
+    }
+
+    function nextQuestion(current) {
+      if (answers[current] === null) return;
+      document.querySelector(`[data-q="${current}"]`).classList.remove('active');
+      document.querySelector(`[data-q="${current + 1}"]`).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevQuestion(current) {
+      document.querySelector(`[data-q="${current}"]`).classList.remove('active');
+      document.querySelector(`[data-q="${current - 1}"]`).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showResult() {
+      if (answers[4] === null) return;
+
+      const counts = { japan: 0, italy: 0, uruguay: 0 };
+      answers.forEach(a => { if (a) counts[a]++; });
+
+      const winner = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+      const r = results[winner];
+
+      document.getElementById('resultBadge').textContent = r.label;
+      document.getElementById('resultBadge').className = `result-badge ${r.badge}`;
+      document.getElementById('resultTitle').textContent = r.title;
+      document.getElementById('resultExplain').textContent = r.explain;
+      document.getElementById('resultMainBtn').textContent = r.btnText;
+      document.getElementById('resultMainBtn').href = r.link;
+
+      document.getElementById('quizArea').style.display = 'none';
+      document.getElementById('progressWrap').style.display = 'none';
+      document.getElementById('resultScreen').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      localStorage.setItem('quizResult', winner);
+    }
+
+    function restartQuiz() {
+      answers.fill(null);
+      document.querySelectorAll('.question-block').forEach((b, i) => {
+        b.classList.remove('active');
+        b.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+      });
+      document.querySelectorAll('.btn.btn-gold[id^="next"]').forEach(b => b.disabled = true);
+      document.querySelector('[data-q="0"]').classList.add('active');
+      document.getElementById('quizArea').style.display = 'block';
+      document.getElementById('progressWrap').style.display = 'block';
+      document.getElementById('resultScreen').classList.remove('visible');
+      document.getElementById('progressBar').style.width = '0%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

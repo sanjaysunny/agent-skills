@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <style>
+    .choice-screen { padding-top: 120px; padding-bottom: 80px; }
+    .choice-confirm-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 16px;
+    }
+    .changed-mind-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 16px 24px;
+      background: rgba(11,15,26,0.95);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      display: none;
+    }
+    .changed-mind-bar.visible { display: flex; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="game.html">Play Game</a></li>
+      <li><a href="destinations.html">Explore All</a></li>
+    </ul>
+  </nav>
+
+  <!-- Selection screen -->
+  <div class="choice-screen container-narrow" id="selectionScreen">
+    <div style="text-align:center;">
+      <div class="eyebrow animate-in" style="margin-bottom:16px;">The moment of truth</div>
+      <h1 class="animate-in delay-1" style="font-size:clamp(2rem,5vw,3.5rem);">Choose Our Next<br><em>Adventure</em></h1>
+      <p class="subtitle animate-in delay-2" style="margin-top:16px; max-width:500px; margin-left:auto; margin-right:auto;">
+        No pressure. No wrong answer. Pick the place your heart wants most.<br>I'll handle the planning.
+      </p>
+      <div class="gold-line wide animate-in delay-3"></div>
+    </div>
+
+    <div class="choice-grid">
+      <div class="choice-card japan" onclick="makeChoice('japan')">
+        <div class="choice-card-icon">🌸</div>
+        <div class="choice-card-name">Japan</div>
+        <div class="choice-card-tagline">Wonder, beauty, and a little magic</div>
+      </div>
+      <div class="choice-card italy" onclick="makeChoice('italy')">
+        <div class="choice-card-icon">🍷</div>
+        <div class="choice-card-name">Italy / Europe</div>
+        <div class="choice-card-tagline">Romance, food, and slow beautiful days</div>
+      </div>
+      <div class="choice-card uruguay" onclick="makeChoice('uruguay')">
+        <div class="choice-card-icon">🎶</div>
+        <div class="choice-card-name">Uruguay</div>
+        <div class="choice-card-tagline">Music, wine, beaches, and the unexpected</div>
+      </div>
+    </div>
+
+    <p class="choice-confirm-note" style="text-align:center;">
+      Tap your choice. You'll see a celebration screen — and you can always change your mind.
+    </p>
+  </div>
+
+  <!-- Celebration screen -->
+  <div class="celebration-screen container-narrow" id="celebrationScreen">
+    <div class="eyebrow" style="margin-bottom:16px; color:var(--gold);">You chose</div>
+    <div class="celebration-dest" id="celebDest"></div>
+    <p class="subtitle" style="margin-top:8px; margin-bottom:32px; color:var(--text-muted);" id="celebTagline"></p>
+    <div class="gold-line wide"></div>
+
+    <p class="celebration-copy">
+      Done. This is our next adventure.<br>
+      I will plan it, book it, and make it beautiful.<br>
+      <strong style="color:var(--text);">You just show up and be loved.</strong>
+    </p>
+
+    <div class="promise-box">
+      <h3>A promise from me</h3>
+      <p>
+        "I promise to make this more than a trip. I will plan it with care, make space for us, think about Kabir, and make sure you feel loved from the moment we leave to the moment we come home."
+      </p>
+    </div>
+
+    <div class="hidden-message">
+      "P.S. I would choose you in every country."
+    </div>
+
+    <div style="margin-top:48px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn btn-gold" onclick="printChoice()">Save this choice 🖨️</button>
+      <button class="btn btn-outline" onclick="shareChoice()">Share the moment</button>
+    </div>
+  </div>
+
+  <!-- Changed mind bar -->
+  <div class="changed-mind-bar" id="changedMindBar">
+    <span style="color:var(--text-muted); font-size:0.9rem;">Changed your mind?</span>
+    <button class="btn btn-ghost" style="padding:8px 20px; font-size:0.8rem;" onclick="resetChoice()">Choose again</button>
+  </div>
+
+  <script>
+    const destinations = {
+      japan: { name: 'Japan', tagline: 'Wonder, beauty, and a little magic.' },
+      italy: { name: 'Italy / Europe', tagline: 'Romance, food, and slow beautiful days.' },
+      uruguay: { name: 'Uruguay', tagline: 'Music, wine, beaches, and the unexpected.' },
+    };
+
+    function makeChoice(dest) {
+      localStorage.setItem('finalChoice', dest);
+      localStorage.setItem('finalChoiceDate', new Date().toISOString());
+
+      const d = destinations[dest];
+      document.getElementById('celebDest').textContent = d.name;
+      document.getElementById('celebTagline').textContent = d.tagline;
+
+      document.getElementById('selectionScreen').style.display = 'none';
+      document.getElementById('celebrationScreen').classList.add('visible');
+      document.getElementById('changedMindBar').classList.add('visible');
+
+      fireConfetti();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function fireConfetti() {
+      const colors = ['#c9a84c', '#e8c97a', '#f0ece4', '#fff'];
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.4 }, colors });
+      setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.6 }, colors, angle: 60 }), 300);
+      setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.6 }, colors, angle: 120 }), 600);
+    }
+
+    function resetChoice() {
+      localStorage.removeItem('finalChoice');
+      document.getElementById('celebrationScreen').classList.remove('visible');
+      document.getElementById('selectionScreen').style.display = 'block';
+      document.getElementById('changedMindBar').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function printChoice() {
+      const dest = localStorage.getItem('finalChoice');
+      if (dest) window.open(`print-cards.html?highlight=${dest}`, '_blank');
+      else window.print();
+    }
+
+    function shareChoice() {
+      const dest = localStorage.getItem('finalChoice');
+      const d = destinations[dest];
+      if (navigator.share) {
+        navigator.share({ title: 'Our Next Adventure', text: `We're going to ${d.name}! 🌍` }).catch(() => {});
+      } else {
+        alert(`We're going to ${d.name}! 🌍\n\n"I will plan it, book it, and make it beautiful."`)
+      }
+    }
+
+    // Check for ?choice= param (from destination pages)
+    const params = new URLSearchParams(window.location.search);
+    const preChoice = params.get('choice');
+    if (preChoice && destinations[preChoice]) {
+      makeChoice(preChoice);
+    } else {
+      // Restore previous choice if exists
+      const prev = localStorage.getItem('finalChoice');
+      if (prev && destinations[prev]) {
+        makeChoice(prev);
+      }
+    }
+  </script>
+</body>
+</html>

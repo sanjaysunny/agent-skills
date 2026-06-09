@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .how-it-works { background: var(--navy-mid); }
+    .how-step { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 40px; }
+    .how-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      color: rgba(201,168,76,0.2);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 60px;
+    }
+    .how-content h3 { color: var(--gold-light); margin-bottom: 8px; font-size: 1.3rem; }
+    .how-content p { color: var(--text-muted); font-size: 0.95rem; }
+
+    .dest-preview { padding: 80px 0; }
+    .dest-preview-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+    .dest-preview-item {
+      padding: 48px 36px;
+      text-align: center;
+      transition: all var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .dest-preview-item:hover { transform: scale(1.02); }
+    .dest-preview-item.japan { background: linear-gradient(160deg, var(--japan-dark), var(--japan-indigo)); }
+    .dest-preview-item.italy { background: linear-gradient(160deg, var(--italy-dark), #3a2010); }
+    .dest-preview-item.uruguay { background: linear-gradient(160deg, var(--uruguay-dark), var(--uruguay-ocean)); }
+    .dest-preview-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .dest-preview-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 8px; }
+    .dest-preview-tag { font-size: 0.8rem; font-style: italic; color: rgba(255,255,255,0.6); }
+
+    .love-note-section { background: var(--navy-mid); padding: 80px 0; text-align: center; }
+
+    @media (max-width: 768px) {
+      .dest-preview-grid { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="game.html">Play Game</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="choose.html">Choose</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow eyebrow animate-in">For your 38th birthday</div>
+    <h1 class="hero-title animate-in delay-1">Choose Our Next<br><em>Adventure</em></h1>
+    <p class="hero-subtitle subtitle animate-in delay-2">
+      For your 38th birthday, I wanted to give you something better than a gift: the choice of our next journey.
+    </p>
+    <a href="game.html" class="btn btn-gold animate-in delay-3">
+      <span>Start the Game</span>
+      <span>→</span>
+    </a>
+  </section>
+
+  <section class="how-it-works">
+    <div class="container-narrow">
+      <div class="eyebrow" style="text-align:center; margin-bottom:16px;">How it works</div>
+      <div class="gold-line wide"></div>
+
+      <div class="how-step animate-in">
+        <div class="how-num">01</div>
+        <div class="how-content">
+          <h3>Open your box</h3>
+          <p>Inside are three destination cards. Start with the one labelled "Start Here".</p>
+        </div>
+      </div>
+
+      <div class="how-step animate-in">
+        <div class="how-num">02</div>
+        <div class="how-content">
+          <h3>Play the game</h3>
+          <p>Answer five short questions — beautiful, not logical — and see which destination your heart points to.</p>
+        </div>
+      </div>
+
+      <div class="how-step animate-in">
+        <div class="how-num">03</div>
+        <div class="how-content">
+          <h3>Explore the dreams</h3>
+          <p>Scan each destination card. Read the details. Feel it out. No pressure, no wrong answer.</p>
+        </div>
+      </div>
+
+      <div class="how-step animate-in">
+        <div class="how-num">04</div>
+        <div class="how-content">
+          <h3>Make the choice</h3>
+          <p>When you're ready, choose. I'll handle the planning, booking, and everything else. You just show up and be loved.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; text-align: center;">
+        <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--text-muted);">
+          "Wherever you choose, I already know my favourite part: travelling there with you."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dest-preview">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:0;">
+        <div class="eyebrow" style="margin-bottom:16px;">Three dreams</div>
+        <h2>The Destinations</h2>
+        <p class="subtitle" style="margin-top:12px;">Each one could be beautiful. The best part is the same in all of them.</p>
+        <div class="gold-line wide"></div>
+      </div>
+    </div>
+    <div class="dest-preview-grid">
+      <a href="japan.html" class="dest-preview-item japan">
+        <div class="dest-preview-icon">🌸</div>
+        <div class="dest-preview-name">Japan</div>
+        <div class="dest-preview-tag">Wonder, beauty, and a little magic</div>
+      </a>
+      <a href="italy-europe.html" class="dest-preview-item italy">
+        <div class="dest-preview-icon">🍷</div>
+        <div class="dest-preview-name">Italy / Europe</div>
+        <div class="dest-preview-tag">Romance, food, and slow beautiful days</div>
+      </a>
+      <a href="uruguay.html" class="dest-preview-item uruguay">
+        <div class="dest-preview-icon">🎶</div>
+        <div class="dest-preview-name">Uruguay</div>
+        <div class="dest-preview-tag">Music, wine, beaches, and the unexpected</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="love-note-section">
+    <div class="container-narrow">
+      <div class="eyebrow" style="margin-bottom:16px;">A note from me</div>
+      <div class="gold-line wide"></div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,3vw,1.7rem); font-style:italic; line-height:1.8; color:var(--text); margin-bottom:32px;">
+        "Happy 38th birthday, my love. You love travelling. You love singing. And I love watching you come alive through both. This year, I wanted to give you something that feels like you: a little game, a little surprise, and the beginning of our next adventure."
+      </p>
+      <div class="gold-line wide"></div>
+      <a href="game.html" class="btn btn-gold" style="margin-top:40px;">Start the Game →</a>
+    </div>
+  </section>
+
+  <footer style="padding: 48px 24px; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);">
+    <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Made with love, for you. Happy 38th. ✦</p>
+  </footer>
+
+  <script>
+    const stars = document.getElementById('stars');
+    for (let i = 0; i < 60; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s;opacity:${Math.random()*0.6+0.1};`;
+      stars.appendChild(s);
+    }
+  </script>
+</body>
+</html>
