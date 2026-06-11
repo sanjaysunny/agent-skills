@@ -7,6 +7,62 @@
   <link rel="stylesheet" href="css/styles.css" />
   <style>
     .section-label { color: #e8c49a; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+
+    .dest-photos { padding: 80px 0; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+    .photo-grid .p-item:nth-child(1) { grid-column: span 2; }
+    .photo-grid .p-item:nth-child(5) { grid-column: span 2; }
+
+    .p-item {
+      position: relative; border-radius: 10px; overflow: hidden;
+      cursor: pointer; min-height: 200px; display: flex; align-items: flex-end;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .p-item:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 2; }
+    .p-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .p-item:hover img { transform: scale(1.05); }
+    .p-item .p-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, var(--italy-dark), #3d2212);
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
+    }
+    .p-item .p-grad-icon { font-size: 2.5rem; opacity: 0.6; }
+    .p-item .p-overlay {
+      position: relative; z-index: 2; width: 100%; padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: rgba(255,255,255,0.9); font-size: 0.82rem;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+    }
+
+    .perfect-for-her { padding: 80px 0; background: rgba(42,26,14,0.4); }
+    .perfect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .perfect-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(232,196,154,0.15);
+      border-radius: 14px; padding: 28px; transition: border-color 0.3s ease;
+    }
+    .perfect-card:hover { border-color: rgba(232,196,154,0.4); }
+    .perfect-card .pc-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .perfect-card h4 { color: #e8c49a; font-size: 1rem; margin-bottom: 10px; font-family: 'Lato', sans-serif; font-weight: 700; }
+    .perfect-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.8; }
+    .perfect-card .pc-quote { margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: #e8c49a; font-size: 0.95rem; opacity: 0.85; }
+
+    .lb { position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;backdrop-filter:blur(8px); }
+    .lb.open { display:flex;animation:lbIn 0.3s ease; }
+    @keyframes lbIn { from{opacity:0} to{opacity:1} }
+    .lb img { max-width:min(90vw,1000px);max-height:80vh;border-radius:8px;object-fit:contain;box-shadow:0 40px 120px rgba(0,0,0,0.8); }
+    .lb-close { position:fixed;top:20px;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.4rem;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+    .lb-cap { position:fixed;bottom:28px;color:rgba(255,255,255,0.6);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem; }
+
+    @media (max-width: 700px) {
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo-grid .p-item:nth-child(1), .photo-grid .p-item:nth-child(5) { grid-column: span 2; }
+      .perfect-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body class="theme-italy">
@@ -52,7 +108,6 @@
       <div class="section-label" style="text-align:center;">Dream Itinerary</div>
       <h2 style="text-align:center; margin-bottom:8px; color:#e8c49a;">How the days could look</h2>
       <div class="gold-line wide" style="background:var(--italy-terra);"></div>
-
       <ul class="itinerary-list" style="margin-top:40px;">
         <li>Rome, Florence, Venice, or Amalfi — each one a masterpiece</li>
         <li>Coffee and pastries in the morning — slow, unhurried, perfect</li>
@@ -64,29 +119,108 @@
     </div>
   </section>
 
-  <!-- Why you'd love it -->
-  <section style="background:rgba(42,26,14,0.5); padding:80px 0;">
-    <div class="container-narrow">
-      <div class="section-label" style="text-align:center;">Why I think you'd love it</div>
-      <h2 style="text-align:center; margin-bottom:32px;">Made for you</h2>
+  <!-- Photo gallery -->
+  <section class="dest-photos">
+    <div class="container">
+      <div class="section-label" style="text-align:center;">See it</div>
+      <h2 style="text-align:center; margin-bottom:8px; color:#e8c49a;">What Italy looks like</h2>
+      <p class="subtitle" style="text-align:center; margin-top:8px;">A preview of the beauty waiting for us.</p>
+      <div class="gold-line wide" style="background:var(--italy-terra);"></div>
 
-      <div class="kabir-section">
-        <div class="kabir-box">
-          <h4 style="color:#e8c49a;">🍝 Food as art</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Italy is one of the greatest food cultures on earth. Every meal is an event. Every region has something different and extraordinary.</p>
+      <div class="photo-grid">
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85', 'Amalfi Coast — the most breathtaking coastline in the world')">
+          <div class="p-grad"><span class="p-grad-icon">🌊</span></div>
+          <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=80" alt="Amalfi Coast" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Amalfi Coast — where the world turns beautiful</div>
         </div>
-        <div class="kabir-box">
-          <h4 style="color:#e8c49a;">🏛️ Beauty in every corner</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">From the Colosseum to the Amalfi coastline, Europe's beauty is overwhelming in the best possible way. Every photo will be breathtaking.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=85', 'Venice — gondolas, canals, and the most romantic city alive')">
+          <div class="p-grad"><span class="p-grad-icon">🛶</span></div>
+          <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=600&q=80" alt="Venice" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Venice, Italy</div>
         </div>
-        <div class="kabir-box">
-          <h4 style="color:#e8c49a;">💃 Dress up, feel alive</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Europe is the kind of trip where you dress up, feel elegant, and walk through streets that make you feel like you're in a film.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=85', 'The Colosseum, Rome — 2,000 years of history, one extraordinary evening')">
+          <div class="p-grad"><span class="p-grad-icon">🏛️</span></div>
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Rome Colosseum" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Rome, Italy</div>
         </div>
-        <div class="kabir-box">
-          <h4 style="color:#e8c49a;">🎶 Music & culture</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Opera in Rome, street music in Florence, jazz in Paris — Europe's musical culture is extraordinary. You would be in your element.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=1200&q=85', 'Tuscany — rolling hills, olive groves, and the slowest, most beautiful pace of life')">
+          <div class="p-grad"><span class="p-grad-icon">🌿</span></div>
+          <img src="https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=600&q=80" alt="Tuscany" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Tuscany — golden hills and slow time</div>
         </div>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85', 'An Italian dinner — pasta, wine, candlelight. The most perfect meal of your life.')">
+          <div class="p-grad"><span class="p-grad-icon">🍷</span></div>
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Italian dinner" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">A dinner we'll never forget</div>
+        </div>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1555396273-a3b4f57a3c06?auto=format&fit=crop&w=1200&q=85', 'An Italian café — espresso, pastry, sunshine, no plans. This is the morning.')">
+          <div class="p-grad"><span class="p-grad-icon">☕</span></div>
+          <img src="https://images.unsplash.com/photo-1555396273-a3b4f57a3c06?auto=format&fit=crop&w=600&q=80" alt="Italian café" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Morning coffee, Italy</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it's perfect for HER -->
+  <section class="perfect-for-her">
+    <div class="container-narrow">
+      <div class="section-label" style="text-align:center;">Why it's perfect for you</div>
+      <h2 style="text-align:center; margin-bottom:8px;">This trip was made for who you are</h2>
+      <p class="subtitle" style="text-align:center; margin-top:8px; margin-bottom:0;">Not just for what looks beautiful. For you, specifically.</p>
+      <div class="gold-line wide" style="background:var(--italy-terra);"></div>
+
+      <div class="perfect-grid">
+
+        <div class="perfect-card">
+          <div class="pc-icon">🎶</div>
+          <h4>Because you love music</h4>
+          <p>Opera was born in Italy. Street musicians in Florence, live jazz in Rome, the natural acoustics of ancient piazzas — Italy is a country that sings. You would feel it everywhere you walk.</p>
+          <div class="pc-quote">"You and Italy would understand each other immediately."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">💃</div>
+          <h4>Because you deserve to feel beautiful</h4>
+          <p>Italy is the kind of trip where you dress up, feel elegant, and walk through streets that make you feel like you're in a film. You would look extraordinary against every backdrop.</p>
+          <div class="pc-quote">"Every photo would be a work of art."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🍽️</div>
+          <h4>Because you eat with your soul</h4>
+          <p>Italy has the greatest food culture on earth. Every region is completely different. Every meal is an event. The pasta, the wine, the cheese, the desserts — you would never want to leave the table.</p>
+          <div class="pc-quote">"We'd spend half the trip planning the next meal."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">💑</div>
+          <h4>Because this trip is for us</h4>
+          <p>Before anything else, it was you and me. Italy is designed for romance — long walks, slow dinners, beautiful hotels, the kind of pace that brings you back to each other. This trip would remind us who we are.</p>
+          <div class="pc-quote">"I want to hold your hand on a bridge in Florence."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">👦</div>
+          <h4>Because Kabir would be celebrated</h4>
+          <p>Italians adore children — genuinely, loudly, warmly. Kabir would be the most celebrated person in every restaurant, every street, every shop. He'd be treated like a little prince.</p>
+          <div class="pc-quote">"He'd have gelato three times a day and love every second."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🌅</div>
+          <h4>Because you deserve slow days</h4>
+          <p>No agenda, no rushing. Italy rewards the art of doing nothing beautifully. A coffee that lasts an hour. A walk with no destination. A sunset that stops you mid-sentence. You need this kind of slow.</p>
+          <div class="pc-quote">"One day with no plan — just us, just wandering."</div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -135,5 +269,24 @@
   <footer style="padding: 48px 24px; text-align: center; border-top: 1px solid rgba(192,99,42,0.15);">
     <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Made with love, for you. Happy 38th. ✦</p>
   </footer>
+
+  <div class="lb" id="lb" onclick="closeLB(event)">
+    <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+    <img id="lbImg" src="" alt="" />
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+
+  <script>
+    function openLB(src, cap) {
+      document.getElementById('lbImg').src = src;
+      document.getElementById('lbCap').textContent = cap;
+      document.getElementById('lb').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(e) {
+      if (e.target === document.getElementById('lb')) { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; } });
+  </script>
 </body>
 </html>

@@ -7,6 +7,62 @@
   <link rel="stylesheet" href="css/styles.css" />
   <style>
     .section-label { color: var(--uruguay-sand); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+
+    .dest-photos { padding: 80px 0; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+    .photo-grid .p-item:nth-child(1) { grid-column: span 2; }
+    .photo-grid .p-item:nth-child(5) { grid-column: span 2; }
+
+    .p-item {
+      position: relative; border-radius: 10px; overflow: hidden;
+      cursor: pointer; min-height: 200px; display: flex; align-items: flex-end;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .p-item:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 2; }
+    .p-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .p-item:hover img { transform: scale(1.05); }
+    .p-item .p-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, var(--uruguay-dark), var(--uruguay-ocean));
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
+    }
+    .p-item .p-grad-icon { font-size: 2.5rem; opacity: 0.6; }
+    .p-item .p-overlay {
+      position: relative; z-index: 2; width: 100%; padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: rgba(255,255,255,0.9); font-size: 0.82rem;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+    }
+
+    .perfect-for-her { padding: 80px 0; background: rgba(10,46,74,0.35); }
+    .perfect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .perfect-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(212,169,106,0.15);
+      border-radius: 14px; padding: 28px; transition: border-color 0.3s ease;
+    }
+    .perfect-card:hover { border-color: rgba(212,169,106,0.4); }
+    .perfect-card .pc-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .perfect-card h4 { color: var(--uruguay-sand); font-size: 1rem; margin-bottom: 10px; font-family: 'Lato', sans-serif; font-weight: 700; }
+    .perfect-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.8; }
+    .perfect-card .pc-quote { margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--uruguay-sand); font-size: 0.95rem; opacity: 0.85; }
+
+    .lb { position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;backdrop-filter:blur(8px); }
+    .lb.open { display:flex;animation:lbIn 0.3s ease; }
+    @keyframes lbIn { from{opacity:0} to{opacity:1} }
+    .lb img { max-width:min(90vw,1000px);max-height:80vh;border-radius:8px;object-fit:contain;box-shadow:0 40px 120px rgba(0,0,0,0.8); }
+    .lb-close { position:fixed;top:20px;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.4rem;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+    .lb-cap { position:fixed;bottom:28px;color:rgba(255,255,255,0.6);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem; }
+
+    @media (max-width: 700px) {
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo-grid .p-item:nth-child(1), .photo-grid .p-item:nth-child(5) { grid-column: span 2; }
+      .perfect-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body class="theme-uruguay">
@@ -52,7 +108,6 @@
       <div class="section-label" style="text-align:center;">Dream Itinerary</div>
       <h2 style="text-align:center; margin-bottom:8px; color:var(--uruguay-sand);">How the days could look</h2>
       <div class="gold-line wide" style="background:var(--uruguay-sand);"></div>
-
       <ul class="itinerary-list" style="margin-top:40px;">
         <li>A Montevideo music night — live Candombe, milonga, and a city that breathes rhythm</li>
         <li>Colonia del Sacramento — the most romantic colonial town in South America</li>
@@ -64,29 +119,108 @@
     </div>
   </section>
 
-  <!-- Why you'd love it -->
-  <section style="background:rgba(10,46,74,0.4); padding:80px 0;">
-    <div class="container-narrow">
-      <div class="section-label" style="text-align:center;">Why I think you'd love it</div>
-      <h2 style="text-align:center; margin-bottom:32px;">Made for you</h2>
+  <!-- Photo gallery -->
+  <section class="dest-photos">
+    <div class="container">
+      <div class="section-label" style="text-align:center;">See it</div>
+      <h2 style="text-align:center; margin-bottom:8px; color:var(--uruguay-sand);">What Uruguay looks like</h2>
+      <p class="subtitle" style="text-align:center; margin-top:8px;">A preview of the world that's already in your heart.</p>
+      <div class="gold-line wide" style="background:var(--uruguay-sand);"></div>
 
-      <div class="kabir-section">
-        <div class="kabir-box">
-          <h4 style="color:var(--uruguay-sand);">🎶 Music is the soul of it</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Uruguay has one of South America's richest music cultures — Candombe, Milonga, Tango, and a live music scene that would speak directly to you.</p>
+      <div class="photo-grid">
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85', 'Punta del Este — one of South America\'s most beautiful beaches')">
+          <div class="p-grad"><span class="p-grad-icon">🏖️</span></div>
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" alt="Punta del Este beach" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Punta del Este — white sand, warm water, free afternoons</div>
         </div>
-        <div class="kabir-box">
-          <h4 style="color:var(--uruguay-sand);">🍷 Wine like nowhere else</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Tannat is Uruguay's signature red — robust, warm, extraordinary. Tasting it in the country where it's made is a completely different experience.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1586711394002-d6ceef96ccc7?auto=format&fit=crop&w=1200&q=85', 'Montevideo — vibrant, musical, and completely unexpected')">
+          <div class="p-grad"><span class="p-grad-icon">🏙️</span></div>
+          <img src="https://images.unsplash.com/photo-1586711394002-d6ceef96ccc7?auto=format&fit=crop&w=600&q=80" alt="Montevideo" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Montevideo — the city that surprises everyone</div>
         </div>
-        <div class="kabir-box">
-          <h4 style="color:var(--uruguay-sand);">🌊 The unexpected beauty</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Most people haven't been. That's part of the magic. Uruguay feels discovered rather than touristy — warm, authentic, and completely real.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=85', 'Tannat wine — Uruguay\'s extraordinary red. Bold, warm, unforgettable.')">
+          <div class="p-grad"><span class="p-grad-icon">🍷</span></div>
+          <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Tannat wine" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Tannat wine — Uruguay's gift to the world</div>
         </div>
-        <div class="kabir-box">
-          <h4 style="color:var(--uruguay-sand);">💃 Your kind of energy</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Uruguay has a Latin warmth that matches your energy perfectly. The people, the food, the music, the pace — it would feel like home immediately.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1569701813229-33284b643e3c?auto=format&fit=crop&w=1200&q=85', 'Colonia del Sacramento — cobblestones, bougainvillea, and the most romantic streets in South America')">
+          <div class="p-grad"><span class="p-grad-icon">🌺</span></div>
+          <img src="https://images.unsplash.com/photo-1569701813229-33284b643e3c?auto=format&fit=crop&w=600&q=80" alt="Colonia del Sacramento" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Colonia del Sacramento — the most romantic town</div>
         </div>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85', 'A South American sunset — the kind that stops you in your tracks and makes you feel everything')">
+          <div class="p-grad"><span class="p-grad-icon">🌅</span></div>
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Sunset" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Sunsets over the Río de la Plata</div>
+        </div>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=1200&q=85', 'Live music in Montevideo — Candombe drums, milonga, and a city that never stops singing')">
+          <div class="p-grad"><span class="p-grad-icon">🥁</span></div>
+          <img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=600&q=80" alt="Live music" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Live music — the heartbeat of Uruguay</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it's perfect for HER -->
+  <section class="perfect-for-her">
+    <div class="container-narrow">
+      <div class="section-label" style="text-align:center;">Why it's perfect for you</div>
+      <h2 style="text-align:center; margin-bottom:8px;">This trip was made for who you are</h2>
+      <p class="subtitle" style="text-align:center; margin-top:8px; margin-bottom:0;">Not just for what looks beautiful. For you, specifically.</p>
+      <div class="gold-line wide" style="background:var(--uruguay-sand);"></div>
+
+      <div class="perfect-grid">
+
+        <div class="perfect-card">
+          <div class="pc-icon">🎶</div>
+          <h4>Because music is your language</h4>
+          <p>Uruguay has one of the richest music cultures in the world — Candombe, Murga, Milonga, Tango. Montevideo's streets play live music on every corner. You would feel instantly at home in this city.</p>
+          <div class="pc-quote">"You could sing alongside musicians in a Montevideo bar. I want that for you."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">💫</div>
+          <h4>Because it's already in your heart</h4>
+          <p>Something drew you to Uruguay specifically. That's not random — that's intuition. The places that call to us before we arrive are always the ones that feel most like home when we get there.</p>
+          <div class="pc-quote">"I love that you have places in your heart before we even go there."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🌊</div>
+          <h4>Because you deserve the beach</h4>
+          <p>Punta del Este has some of the most beautiful beaches in South America — glamorous but relaxed, warm and free. A day where you just sit in the sun with nothing to do and nowhere to be.</p>
+          <div class="pc-quote">"I want to watch you breathe out completely."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">👦</div>
+          <h4>Because Kabir would run wild</h4>
+          <p>Kabir on a South American beach. Kabir chasing seabirds in Colonia. Kabir eating his first chivito. Uruguay is warm, safe, and endlessly stimulating for a curious 2-year-old exploring the world.</p>
+          <div class="pc-quote">"Watching him run towards the ocean for the first time — I already know I'll cry."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🍷</div>
+          <h4>Because you appreciate the unexpected</h4>
+          <p>Tannat wine is unlike anything you've tasted. Uruguay's food is a mix of Italian, Spanish, and South American influences — empanadas, asado, incredible seafood. You'd discover a whole new world of flavour.</p>
+          <div class="pc-quote">"The best meals are always the ones you didn't expect."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🗺️</div>
+          <h4>Because most people haven't been</h4>
+          <p>Uruguay is genuinely undiscovered. No crowds, no tourist traps — just real warmth, real culture, real beauty. This would be YOUR trip. Not a destination anyone else has on their screensaver.</p>
+          <div class="pc-quote">"This is ours. Something nobody else has."</div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -135,5 +269,24 @@
   <footer style="padding: 48px 24px; text-align: center; border-top: 1px solid rgba(212,169,106,0.15);">
     <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Made with love, for you. Happy 38th. ✦</p>
   </footer>
+
+  <div class="lb" id="lb" onclick="closeLB(event)">
+    <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+    <img id="lbImg" src="" alt="" />
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+
+  <script>
+    function openLB(src, cap) {
+      document.getElementById('lbImg').src = src;
+      document.getElementById('lbCap').textContent = cap;
+      document.getElementById('lb').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(e) {
+      if (e.target === document.getElementById('lb')) { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; } });
+  </script>
 </body>
 </html>

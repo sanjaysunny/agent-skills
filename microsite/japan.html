@@ -18,6 +18,91 @@
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
     .section-label { color: var(--japan-blush); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+
+    /* ── Destination photo grid ── */
+    .dest-photos { padding: 80px 0; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+      margin-top: 40px;
+    }
+    .photo-grid .p-item:nth-child(1) { grid-column: span 2; }
+    .photo-grid .p-item:nth-child(5) { grid-column: span 2; }
+
+    .p-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      min-height: 200px;
+      display: flex;
+      align-items: flex-end;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .p-item:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 2; }
+    .p-item img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .p-item:hover img { transform: scale(1.05); }
+    .p-item .p-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, var(--japan-dark), var(--japan-indigo));
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .p-item .p-grad-icon { font-size: 2.5rem; opacity: 0.6; }
+    .p-item .p-overlay {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: rgba(255,255,255,0.9);
+      font-size: 0.82rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    /* ── Why perfect for her ── */
+    .perfect-for-her { padding: 80px 0; background: rgba(26,31,78,0.35); }
+    .perfect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .perfect-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(232,160,176,0.15);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.3s ease;
+    }
+    .perfect-card:hover { border-color: rgba(232,160,176,0.4); }
+    .perfect-card .pc-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .perfect-card h4 { color: var(--japan-blush); font-size: 1rem; margin-bottom: 10px; font-family: 'Lato', sans-serif; font-weight: 700; }
+    .perfect-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.8; }
+    .perfect-card .pc-quote {
+      margin-top: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--japan-blush);
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    /* ── Lightbox ── */
+    .lb { position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;backdrop-filter:blur(8px); }
+    .lb.open { display:flex;animation:lbIn 0.3s ease; }
+    @keyframes lbIn { from{opacity:0} to{opacity:1} }
+    .lb img { max-width:min(90vw,1000px);max-height:80vh;border-radius:8px;object-fit:contain;box-shadow:0 40px 120px rgba(0,0,0,0.8); }
+    .lb-close { position:fixed;top:20px;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.4rem;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+    .lb-cap { position:fixed;bottom:28px;color:rgba(255,255,255,0.6);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem; }
+
+    @media (max-width: 700px) {
+      .photo-grid { grid-template-columns:1fr 1fr; }
+      .photo-grid .p-item:nth-child(1), .photo-grid .p-item:nth-child(5) { grid-column: span 2; }
+      .perfect-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body class="theme-japan">
@@ -64,7 +149,6 @@
       <div class="section-label" style="text-align:center;">Dream Itinerary</div>
       <h2 style="text-align:center; margin-bottom:8px; color:var(--japan-blush);">How the days could look</h2>
       <div class="gold-line wide" style="background:var(--japan-blush);"></div>
-
       <ul class="itinerary-list" style="margin-top:40px;">
         <li>Tokyo city lights — neon, wonder, and the most beautiful chaos</li>
         <li>Kyoto temples and gardens — the quietest, most beautiful places on earth</li>
@@ -76,29 +160,108 @@
     </div>
   </section>
 
-  <!-- Why you'd love it -->
-  <section style="background:rgba(26,31,78,0.4); padding:80px 0;">
-    <div class="container-narrow">
-      <div class="section-label" style="text-align:center;">Why I think you'd love it</div>
-      <h2 style="text-align:center; margin-bottom:32px;">Made for you</h2>
+  <!-- Photo gallery -->
+  <section class="dest-photos">
+    <div class="container">
+      <div class="section-label" style="text-align:center;">See it</div>
+      <h2 style="text-align:center; margin-bottom:8px; color:var(--japan-blush);">What Japan looks like</h2>
+      <p class="subtitle" style="text-align:center; margin-top:8px;">A preview of the world that's waiting.</p>
+      <div class="gold-line wide" style="background:var(--japan-blush);"></div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;" class="kabir-section">
-        <div class="kabir-box">
-          <h4>🌸 Beauty everywhere</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan is one of the most visually stunning places on earth. Every street, garden, and temple is a photograph waiting to happen.</p>
+      <div class="photo-grid">
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85', 'Cherry blossom avenue — one of the most magical streets on earth')">
+          <div class="p-grad"><span class="p-grad-icon">🌸</span></div>
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80" alt="Cherry blossoms" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Cherry blossom avenue, Japan</div>
         </div>
-        <div class="kabir-box">
-          <h4>🍣 Food like nowhere else</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">From tiny ramen spots to high-end sushi, Japan's food culture is extraordinary. You would be in heaven.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=85', 'Fushimi Inari — thousands of torii gates through the mountains')">
+          <div class="p-grad"><span class="p-grad-icon">⛩️</span></div>
+          <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=600&q=80" alt="Kyoto torii gates" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Fushimi Inari, Kyoto</div>
         </div>
-        <div class="kabir-box">
-          <h4>🏮 Calm & wonder together</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan balances magic and peace like nowhere else. Buzzing cities and serene gardens, all within minutes of each other.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=85', 'Tokyo at night — the most extraordinary city skyline in the world')">
+          <div class="p-grad"><span class="p-grad-icon">🗼</span></div>
+          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=600&q=80" alt="Tokyo night" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Tokyo at night</div>
         </div>
-        <div class="kabir-box">
-          <h4>🎵 A new kind of music</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Jazz bars, karaoke, live music in unexpected places — Japan has a music scene you've never experienced before.</p>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=85', 'A zen garden — the most peaceful place you will ever stand')">
+          <div class="p-grad"><span class="p-grad-icon">🪨</span></div>
+          <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=600&q=80" alt="Zen garden" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Zen garden, Kyoto</div>
         </div>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=85', 'The finest sushi you will ever eat — Japan does this better than anywhere')">
+          <div class="p-grad"><span class="p-grad-icon">🍣</span></div>
+          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=900&q=80" alt="Sushi" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Sushi omakase night</div>
+        </div>
+
+        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1528258612827-8e6fc39b2cad?auto=format&fit=crop&w=1200&q=85', 'The deer of Nara — Kabir would lose his mind completely')">
+          <div class="p-grad"><span class="p-grad-icon">🦌</span></div>
+          <img src="https://images.unsplash.com/photo-1528258612827-8e6fc39b2cad?auto=format&fit=crop&w=600&q=80" alt="Nara deer" loading="lazy" onerror="this.style.display='none'" />
+          <div class="p-overlay">Nara deer park — for Kabir</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it's perfect for HER -->
+  <section class="perfect-for-her">
+    <div class="container-narrow">
+      <div class="section-label" style="text-align:center;">Why it's perfect for you</div>
+      <h2 style="text-align:center; margin-bottom:8px;">This trip was made for who you are</h2>
+      <p class="subtitle" style="text-align:center; margin-top:8px; margin-bottom:0;">Not just for what looks beautiful. For you, specifically.</p>
+      <div class="gold-line wide" style="background:var(--japan-blush);"></div>
+
+      <div class="perfect-grid">
+
+        <div class="perfect-card">
+          <div class="pc-icon">🎤</div>
+          <h4>Because you love singing</h4>
+          <p>Japan invented karaoke as it's meant to be experienced — private rooms, full sound systems, just the two of us singing until 2am. No audience, no embarrassment. Just us and the music.</p>
+          <div class="pc-quote">"I want to watch you sing your heart out in Tokyo."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🌸</div>
+          <h4>Because you see beauty differently</h4>
+          <p>You notice things others walk past. Japan is a country built for people like you — every garden, street, bowl of food, and building is considered. You would be overwhelmed in the best possible way.</p>
+          <div class="pc-quote">"You would photograph every inch of it."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">✈️</div>
+          <h4>Because you love discovering</h4>
+          <p>Neither of us has been. This would be our most "new" trip together — genuinely uncharted, genuinely surprising. The kind of travel that makes you feel most alive.</p>
+          <div class="pc-quote">"Something completely different — that's exactly what makes it right."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">👦</div>
+          <h4>Because of Kabir</h4>
+          <p>The deer park in Nara. The shinkansen bullet train. The incredible food. Japan is one of the most family-friendly countries on earth, and Kabir would have the time of his young life.</p>
+          <div class="pc-quote">"Watching him see a deer walk up to him — that photo would live forever."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🍜</div>
+          <h4>Because you eat with your heart</h4>
+          <p>Ramen at midnight, sushi at a 10-seat counter, matcha everything, incredible street food — Japan is a food journey as much as a travel one. You would be in absolute heaven.</p>
+          <div class="pc-quote">"Every meal would be a memory."</div>
+        </div>
+
+        <div class="perfect-card">
+          <div class="pc-icon">🏮</div>
+          <h4>Because you deserve magic</h4>
+          <p>Cherry blossoms, lantern-lit streets, temples at dawn, the Tokyo skyline at night — Japan isn't just beautiful. It's the kind of beautiful that changes how you see the world.</p>
+          <div class="pc-quote">"You deserve to be somewhere that takes your breath away."</div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -111,11 +274,11 @@
       <div class="kabir-section">
         <div class="kabir-box">
           <h4>With Kabir 👦</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan is incredibly family-friendly. Watching Kabir's eyes light up at Kyoto's temples, the deer in Nara, and the food — it would be the kind of trip he'd remember forever.</p>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">Japan is incredibly family-friendly. Watching Kabir's eyes light up at Kyoto's temples, the deer in Nara, and the food — it would be the kind of trip he'd talk about for years.</p>
         </div>
         <div class="kabir-box">
           <h4>Just us 💫</h4>
-          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">A romantic, intimate trip where we slow down completely. Quiet mornings in beautiful hotels, late nights in jazz bars, and the kind of peace that comes with being somewhere completely new.</p>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">A romantic, intimate trip where we slow down completely. Quiet mornings in beautiful hotels, late nights singing karaoke, and the kind of peace that comes with being somewhere completely new together.</p>
         </div>
       </div>
     </div>
@@ -148,6 +311,13 @@
     <p style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Made with love, for you. Happy 38th. ✦</p>
   </footer>
 
+  <!-- Lightbox -->
+  <div class="lb" id="lb" onclick="closeLB(event)">
+    <button class="lb-close" onclick="document.getElementById('lb').classList.remove('open')">✕</button>
+    <img id="lbImg" src="" alt="" />
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+
   <script>
     const petalsContainer = document.getElementById('petals');
     const petals = ['🌸', '🌺', '✿', '꩜'];
@@ -158,6 +328,20 @@
       p.style.cssText = `left:${Math.random()*100}%;animation-delay:${Math.random()*12}s;animation-duration:${8+Math.random()*8}s;font-size:${0.8+Math.random()*0.8}rem;`;
       petalsContainer.appendChild(p);
     }
+
+    function openLB(src, cap) {
+      document.getElementById('lbImg').src = src;
+      document.getElementById('lbCap').textContent = cap;
+      document.getElementById('lb').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(e) {
+      if (e.target === document.getElementById('lb')) {
+        document.getElementById('lb').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; } });
   </script>
 </body>
 </html>
