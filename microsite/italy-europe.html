@@ -129,39 +129,39 @@
 
       <div class="photo-grid">
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85', 'Amalfi Coast — the most breathtaking coastline in the world')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🌊</span></div>
-          <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=80" alt="Amalfi Coast" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/italy/photo-01.jpg" data-fallback="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Amalfi Coast" loading="lazy" />
           <div class="p-overlay">Amalfi Coast — where the world turns beautiful</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=85', 'Venice — gondolas, canals, and the most romantic city alive')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🛶</span></div>
-          <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=600&q=80" alt="Venice" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/italy/photo-02.jpg" data-fallback="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Venice" loading="lazy" />
           <div class="p-overlay">Venice, Italy</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=85', 'The Colosseum, Rome — 2,000 years of history, one extraordinary evening')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🏛️</span></div>
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Rome Colosseum" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/italy/photo-03.jpg" data-fallback="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Rome Colosseum" loading="lazy" />
           <div class="p-overlay">Rome, Italy</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=1200&q=85', 'Tuscany — rolling hills, olive groves, and the slowest, most beautiful pace of life')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🌿</span></div>
-          <img src="https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=600&q=80" alt="Tuscany" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/italy/photo-04.jpg" data-fallback="https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Tuscany" loading="lazy" />
           <div class="p-overlay">Tuscany — golden hills and slow time</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85', 'An Italian dinner — pasta, wine, candlelight. The most perfect meal of your life.')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🍷</span></div>
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Italian dinner" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/italy/photo-05.jpg" data-fallback="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Italian dinner" loading="lazy" />
           <div class="p-overlay">A dinner we'll never forget</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1555396273-a3b4f57a3c06?auto=format&fit=crop&w=1200&q=85', 'An Italian café — espresso, pastry, sunshine, no plans. This is the morning.')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">☕</span></div>
-          <img src="https://images.unsplash.com/photo-1555396273-a3b4f57a3c06?auto=format&fit=crop&w=600&q=80" alt="Italian café" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/italy/photo-06.jpg" data-fallback="https://images.unsplash.com/photo-1555396273-a3b4f57a3c06?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Italian café" loading="lazy" />
           <div class="p-overlay">Morning coffee, Italy</div>
         </div>
 
@@ -277,6 +277,9 @@
   </div>
 
   <script>
+    function openLBFromItem(el) {
+      openLB(el.querySelector('img').src, el.querySelector('.p-overlay').textContent);
+    }
     function openLB(src, cap) {
       document.getElementById('lbImg').src = src;
       document.getElementById('lbCap').textContent = cap;

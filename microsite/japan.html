@@ -170,39 +170,39 @@
 
       <div class="photo-grid">
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85', 'Cherry blossom avenue — one of the most magical streets on earth')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🌸</span></div>
-          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80" alt="Cherry blossoms" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/japan/photo-01.jpg" data-fallback="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Cherry blossoms" loading="lazy" />
           <div class="p-overlay">Cherry blossom avenue, Japan</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=85', 'Fushimi Inari — thousands of torii gates through the mountains')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">⛩️</span></div>
-          <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=600&q=80" alt="Kyoto torii gates" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/japan/photo-02.jpg" data-fallback="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Kyoto torii gates" loading="lazy" />
           <div class="p-overlay">Fushimi Inari, Kyoto</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=85', 'Tokyo at night — the most extraordinary city skyline in the world')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🗼</span></div>
-          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=600&q=80" alt="Tokyo night" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/japan/photo-03.jpg" data-fallback="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Tokyo night" loading="lazy" />
           <div class="p-overlay">Tokyo at night</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=85', 'A zen garden — the most peaceful place you will ever stand')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🪨</span></div>
-          <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=600&q=80" alt="Zen garden" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/japan/photo-04.jpg" data-fallback="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Zen garden" loading="lazy" />
           <div class="p-overlay">Zen garden, Kyoto</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=85', 'The finest sushi you will ever eat — Japan does this better than anywhere')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🍣</span></div>
-          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=900&q=80" alt="Sushi" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/japan/photo-05.jpg" data-fallback="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Sushi" loading="lazy" />
           <div class="p-overlay">Sushi omakase night</div>
         </div>
 
-        <div class="p-item" onclick="openLB('https://images.unsplash.com/photo-1528258612827-8e6fc39b2cad?auto=format&fit=crop&w=1200&q=85', 'The deer of Nara — Kabir would lose his mind completely')">
+        <div class="p-item" onclick="openLBFromItem(this)">
           <div class="p-grad"><span class="p-grad-icon">🦌</span></div>
-          <img src="https://images.unsplash.com/photo-1528258612827-8e6fc39b2cad?auto=format&fit=crop&w=600&q=80" alt="Nara deer" loading="lazy" onerror="this.style.display='none'" />
+          <img src="photos/japan/photo-06.jpg" data-fallback="https://images.unsplash.com/photo-1528258612827-8e6fc39b2cad?auto=format&fit=crop&w=1200&q=85" onerror="this.src=this.dataset.fallback;this.removeAttribute('onerror')" alt="Nara deer" loading="lazy" />
           <div class="p-overlay">Nara deer park — for Kabir</div>
         </div>
 
@@ -329,6 +329,11 @@
       petalsContainer.appendChild(p);
     }
 
+    function openLBFromItem(el) {
+      const img = el.querySelector('img');
+      const cap = el.querySelector('.p-overlay').textContent;
+      openLB(img.src, cap);
+    }
     function openLB(src, cap) {
       document.getElementById('lbImg').src = src;
       document.getElementById('lbCap').textContent = cap;
