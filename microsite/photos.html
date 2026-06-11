@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Photos — Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { background: #07090f; }
+
+    /* ── Intro ── */
+    .photos-hero {
+      padding: 140px 24px 60px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    /* ── Gallery grid ── */
+    .gallery {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      columns: 3 280px;
+      column-gap: 16px;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      display: block;
+      background: var(--navy-light);
+      border: 1px solid rgba(201,168,76,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeUp 0.6s ease both;
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      border-color: rgba(201,168,76,0.3);
+      z-index: 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: rgba(255,255,255,0.85);
+      font-size: 0.8rem;
+      font-style: italic;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .gallery-item:hover .caption { opacity: 1; }
+
+    /* ── Placeholder cards (shown when no photos loaded) ── */
+    .placeholder-card {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      border: 2px dashed rgba(201,168,76,0.2);
+      background: rgba(201,168,76,0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      text-align: center;
+      min-height: 200px;
+    }
+    .placeholder-card.tall { min-height: 300px; }
+    .placeholder-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.4; }
+    .placeholder-text { font-size: 0.8rem; color: rgba(201,168,76,0.4); font-style: italic; }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 24px;
+      cursor: zoom-out;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.open { display: flex; animation: fadeIn 0.3s ease; }
+    .lightbox img {
+      max-width: min(90vw, 1000px);
+      max-height: 80vh;
+      border-radius: 8px;
+      object-fit: contain;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    }
+    .lightbox-caption {
+      color: rgba(255,255,255,0.65);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 24px; right: 24px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-nav {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-counter {
+      position: fixed;
+      bottom: 24px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Instructions banner ── */
+    .add-photos-banner {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      padding: 20px 28px;
+      background: rgba(201,168,76,0.07);
+      border: 1px dashed rgba(201,168,76,0.3);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(201,168,76,0.75);
+    }
+    .add-photos-banner strong { color: var(--gold-light); }
+    .add-photos-banner code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-family: monospace;
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .empty-state-icon { font-size: 4rem; margin-bottom: 24px; opacity: 0.4; }
+
+    /* ── Section dividers ── */
+    .gallery-section-title {
+      text-align: center;
+      padding: 48px 24px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .gallery { columns: 2 140px; column-gap: 10px; }
+      .gallery-item { margin-bottom: 10px; }
+      .lightbox-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="love-letter.html">← The Letter</a></li>
+      <li><a href="choose.html">The Choice</a></li>
+    </ul>
+  </nav>
+
+  <div class="photos-hero">
+    <div class="eyebrow" style="margin-bottom:16px; color:var(--gold);">Our story in photos</div>
+    <h1 style="font-size:clamp(2rem,5vw,3.2rem);">Moments I treasure</h1>
+    <p class="subtitle" style="margin-top:12px;">A few of the photos that live in my heart.</p>
+    <div class="gold-line wide"></div>
+  </div>
+
+  <!-- Instructions (visible until photos are added) -->
+  <div class="add-photos-banner" id="instructionsBanner">
+    <strong>To add your photos:</strong> drop your image files into the <code>microsite/photos/</code> folder,
+    named <code>photo-01.jpg</code>, <code>photo-02.jpg</code>, etc. They'll appear here automatically.
+    Optionally edit the captions in this file. Then hide this banner by setting <code>display:none</code> on it.
+  </div>
+
+  <!-- Gallery renders here -->
+  <div class="gallery" id="gallery"></div>
+
+  <!-- Shown only when zero photos load -->
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="empty-state-icon">📷</div>
+    <h3 style="margin-bottom:16px; color:var(--text-muted);">Photos coming soon</h3>
+    <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">
+      Add your photos to the <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:3px;">microsite/photos/</code> folder,
+      named <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:3px;">photo-01.jpg</code> through <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:3px;">photo-30.jpg</code>.
+      They'll appear here automatically.
+    </p>
+  </div>
+
+  <div style="text-align:center; padding:60px 24px 100px;">
+    <div class="gold-line wide"></div>
+    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--text-muted); margin:32px 0;">
+      "The best moments in life don't always make it into photos.<br>But they always make it into my heart."
+    </p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="choose.html" class="btn btn-gold">Back to the Choice →</a>
+      <a href="love-letter.html" class="btn btn-outline">← Read the Letter</a>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1, event)">‹</button>
+    <img id="lightboxImg" src="" alt="" />
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1, event)">›</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <script>
+    // ── Photo manifest ──
+    // Add your own captions here — one per photo slot.
+    // The gallery auto-skips any photo file that doesn't exist.
+    const photoMeta = [
+      { file: 'photo-01.jpg', caption: '' },
+      { file: 'photo-02.jpg', caption: '' },
+      { file: 'photo-03.jpg', caption: '' },
+      { file: 'photo-04.jpg', caption: '' },
+      { file: 'photo-05.jpg', caption: '' },
+      { file: 'photo-06.jpg', caption: '' },
+      { file: 'photo-07.jpg', caption: '' },
+      { file: 'photo-08.jpg', caption: '' },
+      { file: 'photo-09.jpg', caption: '' },
+      { file: 'photo-10.jpg', caption: '' },
+      { file: 'photo-11.jpg', caption: '' },
+      { file: 'photo-12.jpg', caption: '' },
+      { file: 'photo-13.jpg', caption: '' },
+      { file: 'photo-14.jpg', caption: '' },
+      { file: 'photo-15.jpg', caption: '' },
+      { file: 'photo-16.jpg', caption: '' },
+      { file: 'photo-17.jpg', caption: '' },
+      { file: 'photo-18.jpg', caption: '' },
+      { file: 'photo-19.jpg', caption: '' },
+      { file: 'photo-20.jpg', caption: '' },
+    ];
+
+    const gallery = document.getElementById('gallery');
+    const emptyState = document.getElementById('emptyState');
+    const loadedPhotos = [];
+    let lightboxIndex = 0;
+
+    function tryLoadPhoto(meta, delay) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.src = `photos/${meta.file}`;
+        img.onload = () => {
+          resolve({ ...meta, loaded: true, src: img.src, width: img.naturalWidth, height: img.naturalHeight });
+        };
+        img.onerror = () => resolve({ ...meta, loaded: false });
+      });
+    }
+
+    async function buildGallery() {
+      const results = await Promise.all(photoMeta.map(m => tryLoadPhoto(m)));
+      const loaded = results.filter(r => r.loaded);
+
+      if (loaded.length === 0) {
+        // Show placeholder grid so it doesn't look empty
+        emptyState.style.display = 'block';
+        showPlaceholders();
+        return;
+      }
+
+      document.getElementById('instructionsBanner').style.display = 'none';
+      loaded.forEach((photo, idx) => {
+        loadedPhotos.push(photo);
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.style.animationDelay = `${idx * 0.05}s`;
+        item.innerHTML = `
+          <img src="${photo.src}" alt="${photo.caption || 'A memory'}" loading="lazy" />
+          ${photo.caption ? `<div class="caption">${photo.caption}</div>` : ''}
+        `;
+        item.addEventListener('click', () => openLightbox(idx));
+        gallery.appendChild(item);
+      });
+    }
+
+    function showPlaceholders() {
+      const placeholders = [
+        { tall: true,  icon: '📷', text: 'Your first photo together' },
+        { tall: false, icon: '🌅', text: 'A favourite travel moment' },
+        { tall: false, icon: '👨‍👩‍👦', text: 'With Kabir' },
+        { tall: true,  icon: '🎵', text: 'A singing memory' },
+        { tall: false, icon: '🍷', text: 'A perfect evening' },
+        { tall: false, icon: '✈️', text: 'A journey together' },
+      ];
+      placeholders.forEach(p => {
+        const el = document.createElement('div');
+        el.className = `placeholder-card${p.tall ? ' tall' : ''}`;
+        el.innerHTML = `<div class="placeholder-icon">${p.icon}</div><div class="placeholder-text">${p.text}</div>`;
+        gallery.appendChild(el);
+      });
+    }
+
+    // ── Lightbox ──
+    function openLightbox(idx) {
+      lightboxIndex = idx;
+      renderLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderLightbox() {
+      const p = loadedPhotos[lightboxIndex];
+      document.getElementById('lightboxImg').src = p.src;
+      document.getElementById('lightboxCaption').textContent = p.caption || '';
+      document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${loadedPhotos.length}`;
+    }
+
+    function closeLightbox(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
+    }
+    function closeLightboxBtn() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function navLightbox(dir, e) {
+      e.stopPropagation();
+      lightboxIndex = (lightboxIndex + dir + loadedPhotos.length) % loadedPhotos.length;
+      renderLightbox();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightboxBtn();
+      if (e.key === 'ArrowLeft') navLightbox(-1, e);
+      if (e.key === 'ArrowRight') navLightbox(1, e);
+    });
+
+    buildGallery();
+  </script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Letter For You — Choose Our Next Adventure</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #0b0f1a;
+      overflow-x: hidden;
+    }
+
+    /* ── Ambient particles ── */
+    .ambient { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .ambient-dot {
+      position: absolute;
+      border-radius: 50%;
+      animation: ambientPulse ease-in-out infinite;
+    }
+    @keyframes ambientPulse {
+      0%, 100% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── Letter wrapper ── */
+    .letter-page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 80px 24px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .letter-intro {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 60px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .letter-intro h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      color: #f0ece4;
+      margin-bottom: 12px;
+    }
+    .letter-intro p {
+      font-style: italic;
+      color: rgba(240,236,228,0.5);
+      font-size: 0.95rem;
+    }
+
+    /* ── The letter card ── */
+    .letter-card {
+      max-width: 700px;
+      width: 100%;
+      background: #faf6ee;
+      border-radius: 4px;
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(201,168,76,0.2),
+        inset 0 0 60px rgba(201,168,76,0.04);
+      position: relative;
+      animation: fadeUp 0.9s 0.2s ease both;
+      overflow: hidden;
+    }
+
+    /* Ruled lines background */
+    .letter-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        rgba(180,160,120,0.15) 31px,
+        rgba(180,160,120,0.15) 32px
+      );
+      background-position: 0 72px;
+      pointer-events: none;
+    }
+
+    /* Left margin line */
+    .letter-card::after {
+      content: '';
+      position: absolute;
+      left: 88px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(192,99,42,0.12);
+      pointer-events: none;
+    }
+
+    .letter-inner {
+      padding: 64px 64px 64px 108px;
+      position: relative;
+    }
+
+    /* ── Letter header ── */
+    .letter-date {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: #8a7a60;
+      margin-bottom: 48px;
+      display: block;
+      text-align: right;
+    }
+
+    /* ── Drop cap ── */
+    .letter-body {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      line-height: 2;
+      color: #2a2015;
+      letter-spacing: 0.01em;
+    }
+
+    .letter-body p {
+      margin-bottom: 32px;
+    }
+
+    .letter-body p:first-child::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.5rem;
+      font-weight: 400;
+      float: left;
+      line-height: 0.8;
+      margin: 8px 8px 0 -4px;
+      color: #8b4513;
+    }
+
+    /* ── Highlighted phrases ── */
+    .letter-highlight {
+      background: linear-gradient(120deg, rgba(201,168,76,0.25) 0%, rgba(201,168,76,0.12) 100%);
+      border-radius: 2px;
+      padding: 0 3px;
+      font-weight: 600;
+    }
+
+    /* ── Margin notes ── */
+    .margin-note {
+      position: absolute;
+      left: -84px;
+      width: 72px;
+      font-family: 'Caveat', cursive;
+      font-size: 0.75rem;
+      color: #a08060;
+      text-align: right;
+      line-height: 1.5;
+      transform: rotate(-2deg);
+    }
+
+    /* ── Signature area ── */
+    .letter-sign-off {
+      margin-top: 40px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: #4a3820;
+    }
+    .letter-signature {
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #2a1a0a;
+      margin-top: 8px;
+      line-height: 1;
+    }
+
+    /* ── Wax seal ── */
+    .wax-seal {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #c0632a, #8b1a10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow:
+        0 4px 12px rgba(139,26,16,0.5),
+        inset 0 1px 2px rgba(255,255,255,0.2);
+      margin: 40px auto 0;
+      position: relative;
+    }
+    .wax-seal::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.2);
+    }
+
+    /* ── Bottom CTA ── */
+    .letter-cta {
+      text-align: center;
+      margin-top: 60px;
+      animation: fadeUp 1s 0.5s ease both;
+    }
+    .letter-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: rgba(240,236,228,0.5);
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+    }
+
+    /* ── Personalise hint ── */
+    .personalise-hint {
+      background: rgba(201,168,76,0.08);
+      border: 1px dashed rgba(201,168,76,0.3);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 48px;
+      font-size: 0.85rem;
+      color: rgba(201,168,76,0.8);
+      text-align: center;
+      display: none; /* shown only for author — remove the display:none if you want it visible */
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .letter-inner { padding: 40px 28px 40px 40px; }
+      .letter-card::after { left: 32px; }
+      .margin-note { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient" id="ambient"></div>
+
+  <nav class="nav" style="background:rgba(11,15,26,0.9);">
+    <a href="index.html" class="nav-logo">Choose Our Next Adventure</a>
+    <ul class="nav-links">
+      <li><a href="photos.html">Our Photos →</a></li>
+      <li><a href="choose.html">The Choice</a></li>
+    </ul>
+  </nav>
+
+  <div class="letter-page">
+
+    <div class="letter-intro">
+      <div class="eyebrow" style="margin-bottom:16px; color:var(--gold);">Only for you</div>
+      <h1>A letter I've been meaning to write</h1>
+      <p>For your birthday. For the trip. For everything.</p>
+    </div>
+
+    <div class="letter-card">
+      <div class="letter-inner">
+
+        <span class="letter-date" id="letterDate">June 2026</span>
+
+        <div class="letter-body">
+
+          <p style="position:relative;">
+            <span class="margin-note">for you ♡</span>
+            Happy birthday, my love.
+          </p>
+
+          <p>
+            I've been thinking about what to write for weeks. Not because I don't have enough to say — because I have too much, and I wanted to get it right. So I'm going to try.
+          </p>
+
+          <p style="position:relative;">
+            <span class="margin-note" style="top:0;">this one</span>
+            You are <span class="letter-highlight">38 years old today</span>, and I want you to know something: you are more beautiful, more alive, and more you than you have ever been. I watch you every day — with Kabir, with your music, with the quiet moments you don't think anyone notices — and I think: how did I get this lucky?
+          </p>
+
+          <p>
+            You love travelling. You love singing. And <span class="letter-highlight">I love watching you come alive through both</span>. There is a version of you that only shows up when you are somewhere new, or when you are singing without knowing anyone is listening. I live for that version. I want to give her more room this year.
+          </p>
+
+          <p style="position:relative;">
+            <span class="margin-note" style="top:16px;">Kabir too</span>
+            Kabir is watching us, you know. He is watching how we love each other. He is watching what a marriage looks like when it's full of laughter, adventure, and real tenderness. <span class="letter-highlight">You are teaching him what love looks like</span> just by being you.
+          </p>
+
+          <p>
+            This birthday gift is not about the destination. It never was. It's about giving you a moment where the whole decision belongs to you. Where I stop, step back, and say: <em>where do you want to go? What do you want to feel? What does your heart need?</em> And then I make it happen.
+          </p>
+
+          <p style="position:relative;">
+            <span class="margin-note" style="top:8px;">always</span>
+            Wherever you choose — Japan, Italy, Uruguay — <span class="letter-highlight">I already know my favourite part: I get to go there with you.</span> That's the whole point. That's always been the whole point.
+          </p>
+
+          <p>
+            So choose. Take your time. And then trust that I will make it everything you dreamed, and a little more.
+          </p>
+
+          <p>
+            I love you. More than I say. More than you probably believe on an ordinary Tuesday. But it's true on every ordinary Tuesday too.
+          </p>
+
+          <div class="letter-sign-off">
+            Always yours,
+          </div>
+          <div class="letter-signature">
+            Your husband ♡
+          </div>
+
+        </div><!-- /letter-body -->
+
+        <div class="wax-seal">♡</div>
+
+      </div><!-- /letter-inner -->
+    </div><!-- /letter-card -->
+
+    <div class="letter-cta">
+      <p>There are photos too — moments I wanted you to see again.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="photos.html" class="btn btn-gold">See Our Photos →</a>
+        <a href="choose.html" class="btn btn-outline">Back to the Choice</a>
+      </div>
+    </div>
+
+  </div><!-- /letter-page -->
+
+  <script>
+    // Set letter date
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const now = new Date();
+    document.getElementById('letterDate').textContent = `${months[now.getMonth()]} ${now.getFullYear()}`;
+
+    // Ambient soft dots
+    const amb = document.getElementById('ambient');
+    const colours = ['rgba(201,168,76,', 'rgba(255,220,150,', 'rgba(240,200,120,'];
+    for (let i = 0; i < 30; i++) {
+      const d = document.createElement('div');
+      const size = 2 + Math.random() * 4;
+      const col = colours[Math.floor(Math.random() * colours.length)];
+      d.className = 'ambient-dot';
+      d.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${col}${0.2+Math.random()*0.4});animation-delay:${Math.random()*6}s;animation-duration:${4+Math.random()*5}s;`;
+      amb.appendChild(d);
+    }
+  </script>
+</body>
+</html>
